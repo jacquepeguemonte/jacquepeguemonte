@@ -81,10 +81,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "description", content: "Monte a festa dos seus sonhos de forma prática e econômica. Kits Pegue e Monte em Goianésia - GO." },
       { name: "author", content: "Jacque Pegue & Monte" },
       { name: "p:domain_verify", content: "584b8348f60365f9093c5bb1414fa83b" },
-      { property: "og:title", content: "Jacque Pegue & Monte" },
-      { property: "og:description", content: "Cenários infantis, adultos, chás e temáticos com cara de revista e montagem simplificada." },
+      { property: "og:title", content: "Jacque Pegue & Monte | Decoração de Festa em Goianésia" },
+      { property: "og:description", content: "Monte a festa dos seus sonhos de forma prática e econômica. Kits Pegue e Monte em Goianésia - GO." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
+      { name: "twitter:title", content: "Jacque Pegue & Monte | Decoração de Festa em Goianésia" },
+      { name: "twitter:description", content: "Monte a festa dos seus sonhos de forma prática e econômica. Kits Pegue e Monte em Goianésia - GO." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/c051ecfb-e99a-4efe-b3dc-ddf6b53591ff/id-preview-c555c511--2fa49fb7-d3cd-4eaf-a3a5-fecb5f03e3f8.lovable.app-1782306900304.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/c051ecfb-e99a-4efe-b3dc-ddf6b53591ff/id-preview-c555c511--2fa49fb7-d3cd-4eaf-a3a5-fecb5f03e3f8.lovable.app-1782306900304.png" },
     ],
     links: [
       {
