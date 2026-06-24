@@ -77,14 +77,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Jacque Pegue & Monte | Decoração de Festa em Goianésia" },
+      { name: "description", content: "Monte a festa dos seus sonhos de forma prática e econômica. Kits Pegue e Monte em Goianésia - GO." },
+      { name: "author", content: "Jacque Pegue & Monte" },
+      { name: "p:domain_verify", content: "584b8348f60365f9093c5bb1414fa83b" },
+      { property: "og:title", content: "Jacque Pegue & Monte" },
+      { property: "og:description", content: "Cenários infantis, adultos, chás e temáticos com cara de revista e montagem simplificada." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {
