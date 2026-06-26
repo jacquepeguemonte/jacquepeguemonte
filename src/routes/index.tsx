@@ -258,13 +258,27 @@ function Index() {
             ) : (
               <ul className="divide-y divide-border">
                 {cart.map((i) => (
-                  <li key={i.id} className="flex items-center justify-between py-3 text-sm">
-                    <span className="text-foreground">
-                      {i.qty}× {i.title}
-                    </span>
-                    <span className="font-semibold text-foreground">
-                      {brl(i.qty * i.price)}
-                    </span>
+                  <li key={i.id} className="py-3 text-sm">
+                    <div className="flex items-center justify-between">
+                      <span className="font-medium text-foreground">
+                        {i.qty}× {i.title}
+                      </span>
+                      <span className="font-semibold text-foreground">
+                        {brl(i.qty * i.price)}
+                      </span>
+                    </div>
+                    {i.items.length > 0 && (
+                      <>
+                        <p className="mt-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                          Acompanha o kit:
+                        </p>
+                        <ul className="mt-1 ml-4 list-disc text-xs text-muted-foreground">
+                          {i.items.map((it, idx) => (
+                            <li key={idx}>{it}</li>
+                          ))}
+                        </ul>
+                      </>
+                    )}
                   </li>
                 ))}
               </ul>
