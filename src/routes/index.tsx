@@ -219,13 +219,13 @@ function Index() {
                   </div>
                   <a
                     href={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(
-                      `Olá! Tenho interesse no kit "${p.title}".`,
+                      `Olá! Gostaria de verificar a disponibilidade do kit "${p.title}".`,
                     )}`}
                     target="_blank"
                     rel="noreferrer"
                     className="rounded-md bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground hover:opacity-90"
                   >
-                    Reservar
+                    Verificar disponibilidade
                   </a>
                 </div>
               </div>
