@@ -1,18 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
-import productsData from "@/data/products.json";
 import logoAsset from "@/assets/logo_jpm.jpeg.asset.json";
+import {
+  loadCustom,
+  loadOverrides,
+  mergeCatalog,
+  type Product,
+} from "@/lib/catalog";
 
-type Product = {
-  id: string;
-  title: string;
-  description: string;
-  image: string;
-  price: number;
-};
-
-const products = productsData as Product[];
 const WHATSAPP = "5562981695886";
 const WHATSAPP_DISPLAY = "(62) 8169-5886";
 
@@ -31,32 +27,33 @@ export const Route = createFileRoute("/")({
 function Index() {
   const [query, setQuery] = useState("");
   const [selected, setSelected] = useState<Record<string, number>>({});
-  const [overrides, setOverrides] = useState<Record<string, number>>({});
+  const [catalog, setCatalog] = useState<Product[]>([]);
 
   useEffect(() => {
-    try {
-      const raw = localStorage.getItem("jpm_price_overrides");
-      if (raw) setOverrides(JSON.parse(raw));
-    } catch {}
+    const reload = () => setCatalog(mergeCatalog(loadOverrides(), loadCustom()));
+    reload();
+    const onStorage = (e: StorageEvent) => {
+      if (!e.key || e.key.startsWith("jpm_")) reload();
+    };
+    window.addEventListener("storage", onStorage);
+    window.addEventListener("focus", reload);
+    return () => {
+      window.removeEventListener("storage", onStorage);
+      window.removeEventListener("focus", reload);
+    };
   }, []);
-
-  const priced = useMemo(
-    () => products.map((p) => ({ ...p, price: overrides[p.id] ?? p.price })),
-    [overrides],
-  );
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
-    const list = priced.filter((p) => p.title);
-    if (!q) return list;
-    return list.filter((p) => p.title.toLowerCase().includes(q));
-  }, [query, priced]);
+    if (!q) return catalog;
+    return catalog.filter((p) => p.title.toLowerCase().includes(q));
+  }, [query, catalog]);
 
   const cart = useMemo(() => {
-    return priced
+    return catalog
       .map((p) => ({ ...p, qty: selected[p.id] ?? 0 }))
       .filter((p) => p.qty > 0);
-  }, [selected, priced]);
+  }, [selected, catalog]);
 
   const total = cart.reduce((sum, item) => sum + item.qty * item.price, 0);
 
@@ -73,9 +70,10 @@ function Index() {
     });
 
   const sendBudget = () => {
-    const lines = cart.map(
-      (i) => `• ${i.qty}x ${i.title} — ${brl(i.qty * i.price)}`,
-    );
+    const lines = cart.flatMap((i) => [
+      `• ${i.qty}x ${i.title} — ${brl(i.qty * i.price)}`,
+      ...i.items.map((it) => `   - ${it}`),
+    ]);
     const msg = [
       "Olá! Gostaria de um orçamento para os seguintes kits:",
       "",
