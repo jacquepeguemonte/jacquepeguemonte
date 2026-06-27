@@ -28,6 +28,9 @@ function Index() {
   const [query, setQuery] = useState("");
   const [selected, setSelected] = useState<Record<string, number>>({});
   const [catalog, setCatalog] = useState<Product[]>([]);
+  const [availability, setAvailability] = useState<Product | null>(null);
+  const [availName, setAvailName] = useState("");
+  const [availDate, setAvailDate] = useState("");
 
   useEffect(() => {
     const reload = () => setCatalog(mergeCatalog(loadOverrides(), loadCustom()));
@@ -85,6 +88,31 @@ function Index() {
       `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`,
       "_blank",
     );
+  };
+
+  const openAvailability = (p: Product) => {
+    setAvailability(p);
+    setAvailName("");
+    setAvailDate("");
+  };
+
+  const sendAvailability = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!availability) return;
+    const prettyDate = availDate
+      ? new Date(availDate + "T00:00:00").toLocaleDateString("pt-BR")
+      : "";
+    const msg = [
+      `Olá! Gostaria de verificar a disponibilidade do kit "${availability.title}".`,
+      "",
+      `Nome: ${availName}`,
+      `Data do evento: ${prettyDate}`,
+    ].join("\n");
+    window.open(
+      `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`,
+      "_blank",
+    );
+    setAvailability(null);
   };
 
   return (
@@ -217,16 +245,13 @@ function Index() {
                       +
                     </button>
                   </div>
-                  <a
-                    href={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(
-                      `Olá! Gostaria de verificar a disponibilidade do kit "${p.title}".`,
-                    )}`}
-                    target="_blank"
-                    rel="noreferrer"
+                  <button
+                    type="button"
+                    onClick={() => openAvailability(p)}
                     className="rounded-md bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground hover:opacity-90"
                   >
                     Verificar disponibilidade
-                  </a>
+                  </button>
                 </div>
               </div>
             </li>
