@@ -362,6 +362,67 @@ function Index() {
         © {new Date().getFullYear()} Jacque Pegue & Monte · Goianésia - GO ·{" "}
         <Link to="/admin" className="hover:text-primary">Admin</Link>
       </footer>
+
+      {availability && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
+          onClick={() => setAvailability(null)}
+        >
+          <form
+            onClick={(e) => e.stopPropagation()}
+            onSubmit={sendAvailability}
+            className="w-full max-w-md rounded-2xl bg-card p-6 shadow-2xl"
+          >
+            <h3 className="text-lg font-bold text-foreground">
+              Verificar disponibilidade
+            </h3>
+            <p className="mt-1 text-sm text-muted-foreground">
+              Kit: <strong>{availability.title}</strong>
+            </p>
+            <div className="mt-4 space-y-3">
+              <div>
+                <label className="block text-xs font-medium text-foreground">
+                  Nome do contato
+                </label>
+                <input
+                  required
+                  value={availName}
+                  onChange={(e) => setAvailName(e.target.value)}
+                  className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-ring/50"
+                  placeholder="Seu nome"
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-medium text-foreground">
+                  Data do evento
+                </label>
+                <input
+                  required
+                  type="date"
+                  value={availDate}
+                  onChange={(e) => setAvailDate(e.target.value)}
+                  className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-ring/50"
+                />
+              </div>
+            </div>
+            <div className="mt-5 flex justify-end gap-2">
+              <button
+                type="button"
+                onClick={() => setAvailability(null)}
+                className="rounded-md border border-border px-4 py-2 text-sm font-medium text-foreground hover:bg-muted"
+              >
+                Cancelar
+              </button>
+              <button
+                type="submit"
+                className="rounded-md bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:opacity-90"
+              >
+                Enviar no WhatsApp
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
     </div>
   );
 }
