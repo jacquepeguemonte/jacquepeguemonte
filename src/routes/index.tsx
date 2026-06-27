@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import logoAsset from "@/assets/logo_jpm.jpeg.asset.json";
+import heroVideoAsset from "@/assets/hero-video.mp4.asset.json";
 import {
   loadCustom,
   loadOverrides,
@@ -180,10 +181,15 @@ function Index() {
             </div>
           </div>
           <div className="flex items-center justify-center">
-            <img
-              src={logoAsset.url}
-              alt="Logo Jacque Pegue & Monte"
-              className="w-72 rounded-3xl shadow-2xl sm:w-96"
+            <video
+              src={heroVideoAsset.url}
+              autoPlay
+              muted
+              loop
+              playsInline
+              poster={logoAsset.url}
+              className="max-h-[28rem] w-auto rounded-3xl shadow-2xl object-cover"
+              aria-label="Vídeo de decoração de festa Pegue e Monte"
             />
           </div>
         </div>
