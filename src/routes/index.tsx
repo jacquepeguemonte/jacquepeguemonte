@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import logoAsset from "@/assets/logo_jpm.jpeg.asset.json";
+import heroVideoAsset from "@/assets/hero-video.mp4.asset.json";
 import {
   loadCustom,
   loadOverrides,
