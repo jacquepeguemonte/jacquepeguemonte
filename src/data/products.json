@@ -329,10 +329,52 @@
     "price": 170.0
   },
   {
-    "id": "JPM_48",
-    "title": "",
-    "description": "",
-    "image": "",
-    "price": 170.0
+    "id": "JPM_NEW_1",
+    "title": "Jardim dos Passarinhos",
+    "description": "Kit de festa Pegue e Monte tema Jardim dos Passarinhos. Inclui itens decorativos para sua festa em Goianésia - GO.",
+    "image": "/__l5e/assets-v1/d82ff61f-9a1c-4ea7-9a10-3a9b33dbb061/jardim-passarinhos.jpg",
+    "price": 125.0
+  },
+  {
+    "id": "JPM_NEW_2",
+    "title": "Turma da Mônica",
+    "description": "Kit de festa Pegue e Monte tema Turma da Mônica. Inclui itens decorativos para sua festa em Goianésia - GO.",
+    "image": "/__l5e/assets-v1/d098ae26-e6e2-49ca-8b6f-7e7902d171b7/turma-monica.jpeg",
+    "price": 125.0
+  },
+  {
+    "id": "JPM_NEW_3",
+    "title": "Fazendinha Baby",
+    "description": "Kit de festa Pegue e Monte tema Fazendinha Baby. Inclui itens decorativos para sua festa em Goianésia - GO.",
+    "image": "/__l5e/assets-v1/86c08a9a-137d-48ea-a76e-52f3b822f3fe/fazendinha-baby.jpg",
+    "price": 125.0
+  },
+  {
+    "id": "JPM_NEW_4",
+    "title": "Aniversário Adulto Feminino",
+    "description": "Kit de festa Pegue e Monte tema Aniversário Adulto Feminino. Inclui itens decorativos para sua festa em Goianésia - GO.",
+    "image": "/__l5e/assets-v1/9f25c5bc-4d07-493a-8097-61e597b2a306/adulto-feminino.jpg",
+    "price": 125.0
+  },
+  {
+    "id": "JPM_NEW_5",
+    "title": "Jardim Encantado Básico",
+    "description": "Kit de festa Pegue e Monte tema Jardim Encantado Básico. Inclui itens decorativos para sua festa em Goianésia - GO.",
+    "image": "/__l5e/assets-v1/6497aeab-5cb8-42b0-802f-84e929c26275/jardim-encantado.png",
+    "price": 125.0
+  },
+  {
+    "id": "JPM_NEW_6",
+    "title": "Adulto Verde Esmeralda",
+    "description": "Kit de festa Pegue e Monte tema Adulto Verde Esmeralda. Inclui itens decorativos para sua festa em Goianésia - GO.",
+    "image": "/__l5e/assets-v1/bf6cb92f-6178-4554-82dc-e18c703b226d/verde-esmeralda.jpg",
+    "price": 125.0
+  },
+  {
+    "id": "JPM_NEW_7",
+    "title": "Elegance",
+    "description": "Kit de festa Pegue e Monte tema Elegance. Inclui itens decorativos para sua festa em Goianésia - GO.",
+    "image": "/__l5e/assets-v1/ab50ba0f-e385-47f0-be4e-7cc1a18368ba/elegance.png",
+    "price": 125.0
   }
 ]
