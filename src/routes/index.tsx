@@ -20,6 +20,39 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "Catálogo virtual de kits de festa Pegue e Monte em Goianésia - GO." },
       { property: "og:title", content: "Jacque Pegue & Monte | Catálogo" },
       { property: "og:description", content: "Catálogo virtual de kits de festa Pegue e Monte em Goianésia - GO." },
+      { property: "og:url", content: "https://jacquepeguemonte.lovable.app/" },
+    ],
+    links: [
+      { rel: "canonical", href: "https://jacquepeguemonte.lovable.app/" },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "LocalBusiness",
+          name: "Jacque Pegue & Monte",
+          image: "https://jacquepeguemonte.lovable.app/",
+          url: "https://jacquepeguemonte.lovable.app/",
+          telephone: "+55-62-98169-5886",
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: "Rua 25, nº 328 — Centro",
+            addressLocality: "Goianésia",
+            addressRegion: "GO",
+            postalCode: "76380-000",
+            addressCountry: "BR",
+          },
+          openingHoursSpecification: [
+            {
+              "@type": "OpeningHoursSpecification",
+              dayOfWeek: "Saturday",
+              opens: "08:30",
+              closes: "11:30",
+            },
+          ],
+        }),
+      },
     ],
   }),
   component: Index,
@@ -128,7 +161,7 @@ function Index() {
             />
             <div className="hidden sm:block">
               <h1 className="text-lg font-bold tracking-tight text-foreground">
-                Jacque Pegue & Monte
+                Jacque Pegue & Monte — Catálogo de Decoração
               </h1>
               <p className="text-xs text-muted-foreground">Decoração para sua festa · Goianésia - GO</p>
             </div>
@@ -144,6 +177,7 @@ function Index() {
         </div>
       </header>
 
+      <main>
       <section
         id="top"
         className="relative overflow-hidden"
@@ -206,6 +240,7 @@ function Index() {
           <input
             type="search"
             placeholder="Buscar tema..."
+            aria-label="Buscar tema"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             className="w-full rounded-md border border-input bg-card px-4 py-2 text-sm text-foreground outline-none ring-ring/50 focus:ring-2 sm:w-72"
@@ -363,6 +398,7 @@ function Index() {
           </div>
         </div>
       </section>
+      </main>
 
       <footer className="border-t border-border py-8 text-center text-xs text-muted-foreground">
         © {new Date().getFullYear()} Jacque Pegue & Monte · Goianésia - GO ·{" "}
@@ -387,10 +423,11 @@ function Index() {
             </p>
             <div className="mt-4 space-y-3">
               <div>
-                <label className="block text-xs font-medium text-foreground">
+                <label htmlFor="avail-name" className="block text-xs font-medium text-foreground">
                   Nome do contato
                 </label>
                 <input
+                  id="avail-name"
                   required
                   value={availName}
                   onChange={(e) => setAvailName(e.target.value)}
@@ -399,10 +436,11 @@ function Index() {
                 />
               </div>
               <div>
-                <label className="block text-xs font-medium text-foreground">
+                <label htmlFor="avail-date" className="block text-xs font-medium text-foreground">
                   Data do evento
                 </label>
                 <input
+                  id="avail-date"
                   required
                   type="date"
                   value={availDate}

@@ -96,6 +96,26 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: appCss,
       },
     ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Organization",
+              name: "Jacque Pegue & Monte",
+              url: "https://jacquepeguemonte.lovable.app",
+            },
+            {
+              "@type": "WebSite",
+              name: "Jacque Pegue & Monte",
+              url: "https://jacquepeguemonte.lovable.app",
+            },
+          ],
+        }),
+      },
+    ],
   }),
   shellComponent: RootShell,
   component: RootComponent,

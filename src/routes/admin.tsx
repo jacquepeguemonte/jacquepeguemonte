@@ -21,7 +21,11 @@ export const Route = createFileRoute("/admin")({
   head: () => ({
     meta: [
       { title: "Administração | Jacque Pegue & Monte" },
+      { name: "description", content: "Painel de administração interno do catálogo Jacque Pegue & Monte para gestão de kits, preços e temas." },
       { name: "robots", content: "noindex,nofollow" },
+    ],
+    links: [
+      { rel: "canonical", href: "https://jacquepeguemonte.lovable.app/admin" },
     ],
   }),
   component: Admin,
