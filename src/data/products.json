@@ -389,5 +389,47 @@
     "description": "Kit de festa Pegue e Monte tema Fazendinha do Mickey Fazendeiro. Inclui itens decorativos para sua festa em Goianésia - GO.",
     "image": "/__l5e/assets-v1/f426f5bc-8384-411c-98a0-80375feb9437/fazendinha-do-mickey.png",
     "price": 170.0
+  },
+  {
+    "id": "JPM_NEW_10",
+    "title": "Deus é Amor",
+    "description": "Kit de festa Pegue e Monte tema Deus é Amor. Inclui itens decorativos para sua festa em Goianésia - GO.",
+    "image": "/__l5e/assets-v1/8e3469a5-93bd-4683-b8fc-4d7e7c115690/deus-e-amor.jpg",
+    "price": 170.0
+  },
+  {
+    "id": "JPM_NEW_11",
+    "title": "Happy Birthday Pink",
+    "description": "Kit de festa Pegue e Monte tema Happy Birthday Pink. Inclui itens decorativos para sua festa em Goianésia - GO.",
+    "image": "/__l5e/assets-v1/82233f6c-1d54-443b-b030-2164e565d998/happy-birthday-pink.png",
+    "price": 170.0
+  },
+  {
+    "id": "JPM_NEW_12",
+    "title": "Pool Party",
+    "description": "Kit de festa Pegue e Monte tema Pool Party. Inclui itens decorativos para sua festa em Goianésia - GO.",
+    "image": "/__l5e/assets-v1/ec613d2e-de02-45e4-b1da-5dacf4d9809a/pool-party.jpg",
+    "price": 170.0
+  },
+  {
+    "id": "JPM_NEW_13",
+    "title": "Pink e Vermelho",
+    "description": "Kit de festa Pegue e Monte tema Pink e Vermelho. Inclui itens decorativos para sua festa em Goianésia - GO.",
+    "image": "/__l5e/assets-v1/58fa9726-6895-481e-8584-f57626fc41e6/pink-vermelho.jpg",
+    "price": 170.0
+  },
+  {
+    "id": "JPM_NEW_14",
+    "title": "Pink e Dourado",
+    "description": "Kit de festa Pegue e Monte tema Pink e Dourado. Inclui itens decorativos para sua festa em Goianésia - GO.",
+    "image": "/__l5e/assets-v1/c38fbf46-d88a-475a-a0b8-2445052ea5d7/pink-dourado.jpg",
+    "price": 170.0
+  },
+  {
+    "id": "JPM_NEW_15",
+    "title": "Pink Floral",
+    "description": "Kit de festa Pegue e Monte tema Pink Floral. Inclui itens decorativos para sua festa em Goianésia - GO.",
+    "image": "/__l5e/assets-v1/ecb41e3e-6e35-4920-875a-e80c0019ffbe/pink-floral.jpg",
+    "price": 170.0
   }
 ]
