@@ -20,6 +20,39 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "Catálogo virtual de kits de festa Pegue e Monte em Goianésia - GO." },
       { property: "og:title", content: "Jacque Pegue & Monte | Catálogo" },
       { property: "og:description", content: "Catálogo virtual de kits de festa Pegue e Monte em Goianésia - GO." },
+      { property: "og:url", content: "https://jacquepeguemonte.lovable.app/" },
+    ],
+    links: [
+      { rel: "canonical", href: "https://jacquepeguemonte.lovable.app/" },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "LocalBusiness",
+          name: "Jacque Pegue & Monte",
+          image: "https://jacquepeguemonte.lovable.app/",
+          url: "https://jacquepeguemonte.lovable.app/",
+          telephone: "+55-62-98169-5886",
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: "Rua 25, nº 328 — Centro",
+            addressLocality: "Goianésia",
+            addressRegion: "GO",
+            postalCode: "76380-000",
+            addressCountry: "BR",
+          },
+          openingHoursSpecification: [
+            {
+              "@type": "OpeningHoursSpecification",
+              dayOfWeek: "Saturday",
+              opens: "08:30",
+              closes: "11:30",
+            },
+          ],
+        }),
+      },
     ],
   }),
   component: Index,
