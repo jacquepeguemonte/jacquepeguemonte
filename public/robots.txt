@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+
+Sitemap: https://jacquepeguemonte.lovable.app/sitemap.xml
