@@ -400,6 +400,122 @@ function Index() {
         </div>
       </section>
 
+      <section id="comprovante" className="bg-muted/40 py-16">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold tracking-tight text-foreground">
+            Enviar comprovante
+          </h2>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Anexe o comprovante bancário (pagamento) ou de recebimento e preencha os dados abaixo.
+          </p>
+
+          <form
+            onSubmit={sendReceipt}
+            className="mt-6 space-y-4 rounded-2xl border border-border bg-card p-6 shadow-sm"
+          >
+            <div className="flex flex-wrap gap-2">
+              {(["pagamento", "recebimento"] as const).map((k) => (
+                <button
+                  key={k}
+                  type="button"
+                  onClick={() => setReceiptKind(k)}
+                  className={`rounded-full border px-4 py-1.5 text-xs font-semibold capitalize transition ${
+                    receiptKind === k
+                      ? "border-primary bg-primary text-primary-foreground"
+                      : "border-border bg-background text-foreground hover:bg-muted"
+                  }`}
+                >
+                  Comprovante de {k}
+                </button>
+              ))}
+            </div>
+
+            <div>
+              <label htmlFor="rec-file" className="block text-xs font-medium text-foreground">
+                Arquivo do comprovante (imagem ou PDF)
+              </label>
+              <input
+                id="rec-file"
+                required
+                type="file"
+                accept="image/*,application/pdf"
+                onChange={(e) => onReceiptFile(e.target.files?.[0] ?? null)}
+                className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm file:mr-3 file:rounded file:border-0 file:bg-primary file:px-3 file:py-1.5 file:text-xs file:font-semibold file:text-primary-foreground"
+              />
+              {receiptPreview && receiptFile?.type.startsWith("image/") && (
+                <img
+                  src={receiptPreview}
+                  alt="Prévia do comprovante"
+                  className="mt-3 max-h-64 rounded-md border border-border object-contain"
+                />
+              )}
+              {receiptFile && !receiptFile.type.startsWith("image/") && (
+                <p className="mt-2 text-xs text-muted-foreground">
+                  Arquivo selecionado: {receiptFile.name}
+                </p>
+              )}
+            </div>
+
+            <div className="grid gap-3 sm:grid-cols-3">
+              <div>
+                <label htmlFor="rec-name" className="block text-xs font-medium text-foreground">
+                  Nome
+                </label>
+                <input
+                  id="rec-name"
+                  required
+                  value={receiptName}
+                  onChange={(e) => setReceiptName(e.target.value)}
+                  maxLength={100}
+                  className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-ring/50"
+                  placeholder="Seu nome"
+                />
+              </div>
+              <div>
+                <label htmlFor="rec-value" className="block text-xs font-medium text-foreground">
+                  Valor (R$)
+                </label>
+                <input
+                  id="rec-value"
+                  required
+                  inputMode="decimal"
+                  value={receiptValue}
+                  onChange={(e) => setReceiptValue(e.target.value)}
+                  className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-ring/50"
+                  placeholder="0,00"
+                />
+              </div>
+              <div>
+                <label htmlFor="rec-date" className="block text-xs font-medium text-foreground">
+                  Data
+                </label>
+                <input
+                  id="rec-date"
+                  required
+                  type="date"
+                  value={receiptDate}
+                  onChange={(e) => setReceiptDate(e.target.value)}
+                  className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-ring/50"
+                />
+              </div>
+            </div>
+
+            <p className="text-xs text-muted-foreground">
+              Ao enviar, abriremos o WhatsApp com os dados preenchidos. <strong>Anexe a imagem/PDF do comprovante</strong> na conversa antes de enviar.
+            </p>
+
+            <div className="flex justify-end">
+              <button
+                type="submit"
+                className="rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground shadow hover:opacity-90"
+              >
+                Enviar no WhatsApp
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+
       <section id="contato" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid gap-6 md:grid-cols-3">
           <div className="rounded-2xl border border-border bg-card p-6">
