@@ -480,5 +480,19 @@
     "description": "Kit de festa Pegue e Monte tema Azul e Branco. Inclui itens decorativos para sua festa em Goianésia - GO.",
     "image": "/__l5e/assets-v1/df6dcb6c-d9af-4f5a-9895-983e4b955216/azul-branco.png",
     "price": 170.0
+  },
+  {
+    "id": "JPM_NEW_24",
+    "title": "Super Mario Aula da Saudade",
+    "description": "Kit de festa Pegue e Monte tema Super Mario Aula da Saudade. Inclui itens decorativos para sua festa em Goianésia - GO.",
+    "image": "/__l5e/assets-v1/d6ec907a-4f8c-4524-b867-d4d76d008345/super-mario-aula.jpg",
+    "price": 170.0
+  },
+  {
+    "id": "JPM_NEW_25",
+    "title": "Fadinha Encantada",
+    "description": "Kit de festa Pegue e Monte tema Fadinha Encantada. Inclui itens decorativos para sua festa em Goianésia - GO.",
+    "image": "/__l5e/assets-v1/72cbc884-2ce4-4032-8bea-206cab604ef0/fadinha-encantada.jpg",
+    "price": 170.0
   }
 ]
