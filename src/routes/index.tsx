@@ -65,6 +65,12 @@ function Index() {
   const [availability, setAvailability] = useState<Product | null>(null);
   const [availName, setAvailName] = useState("");
   const [availDate, setAvailDate] = useState("");
+  const [receiptFile, setReceiptFile] = useState<File | null>(null);
+  const [receiptPreview, setReceiptPreview] = useState<string>("");
+  const [receiptName, setReceiptName] = useState("");
+  const [receiptValue, setReceiptValue] = useState("");
+  const [receiptDate, setReceiptDate] = useState("");
+  const [receiptKind, setReceiptKind] = useState<"pagamento" | "recebimento">("pagamento");
 
   useEffect(() => {
     const reload = () => setCatalog(mergeCatalog(loadOverrides(), loadCustom()));
@@ -147,6 +153,34 @@ function Index() {
       "_blank",
     );
     setAvailability(null);
+  };
+
+  const onReceiptFile = (f: File | null) => {
+    setReceiptFile(f);
+    if (receiptPreview) URL.revokeObjectURL(receiptPreview);
+    setReceiptPreview(f ? URL.createObjectURL(f) : "");
+  };
+
+  const sendReceipt = (e: React.FormEvent) => {
+    e.preventDefault();
+    const prettyDate = receiptDate
+      ? new Date(receiptDate + "T00:00:00").toLocaleDateString("pt-BR")
+      : "";
+    const valueNum = Number(receiptValue.replace(",", "."));
+    const valueFmt = isNaN(valueNum) ? receiptValue : brl(valueNum);
+    const msg = [
+      `Olá! Envio comprovante de ${receiptKind}.`,
+      "",
+      `Nome: ${receiptName}`,
+      `Valor: ${valueFmt}`,
+      `Data: ${prettyDate}`,
+      "",
+      "Vou anexar a imagem do comprovante em seguida.",
+    ].join("\n");
+    window.open(
+      `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`,
+      "_blank",
+    );
   };
 
   return (
