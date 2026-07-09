@@ -14,13 +14,6 @@
     "price": 170.0
   },
   {
-    "id": "JPM_3",
-    "title": "Fazendinha do Mickey",
-    "description": "Kit de festa Pegue e Monte tema Fazendinha do Mickey. Inclui itens decorativos para sua festa em Goianésia - GO.",
-    "image": "https://media.base44.com/images/public/69bfc60ede2f4cd45a84316c/63057e2b2_Tema_MIckey.png",
-    "price": 170.0
-  },
-  {
     "id": "JPM_4",
     "title": "Patrulha Canina",
     "description": "Kit de festa Pegue e Monte tema Patrulha Canina. Inclui itens decorativos para sua festa em Goianésia - GO.",
@@ -430,6 +423,62 @@
     "title": "Pink Floral",
     "description": "Kit de festa Pegue e Monte tema Pink Floral. Inclui itens decorativos para sua festa em Goianésia - GO.",
     "image": "/__l5e/assets-v1/ecb41e3e-6e35-4920-875a-e80c0019ffbe/pink-floral.jpg",
+    "price": 170.0
+  },
+  {
+    "id": "JPM_NEW_16",
+    "title": "Princesas Cute",
+    "description": "Kit de festa Pegue e Monte tema Princesas Cute. Inclui itens decorativos para sua festa em Goianésia - GO.",
+    "image": "/__l5e/assets-v1/e0a404c7-9413-460e-818d-8700a6aa5828/princesas-cute.jpg",
+    "price": 170.0
+  },
+  {
+    "id": "JPM_NEW_17",
+    "title": "Rústico Amor",
+    "description": "Kit de festa Pegue e Monte tema Rústico Amor. Inclui itens decorativos para sua festa em Goianésia - GO.",
+    "image": "/__l5e/assets-v1/a6a2ec74-b9e2-4284-8a8d-b2d828e66d10/rustico-amor.jpg",
+    "price": 170.0
+  },
+  {
+    "id": "JPM_NEW_18",
+    "title": "Minnie Borboletas",
+    "description": "Kit de festa Pegue e Monte tema Minnie Borboletas. Inclui itens decorativos para sua festa em Goianésia - GO.",
+    "image": "/__l5e/assets-v1/01e5b9cc-fb2f-41c1-8535-6a52797cf1f9/minnie-borboletas.jpg",
+    "price": 170.0
+  },
+  {
+    "id": "JPM_NEW_19",
+    "title": "Preto e Dourado",
+    "description": "Kit de festa Pegue e Monte tema Preto e Dourado. Inclui itens decorativos para sua festa em Goianésia - GO.",
+    "image": "/__l5e/assets-v1/a98ed8f5-8cc8-4974-b194-0858254b7d3d/preto-dourado.jpg",
+    "price": 170.0
+  },
+  {
+    "id": "JPM_NEW_20",
+    "title": "Chá de Panela Rosé",
+    "description": "Kit de festa Pegue e Monte tema Chá de Panela Rosé. Inclui itens decorativos para sua festa em Goianésia - GO.",
+    "image": "/__l5e/assets-v1/66eb2483-4996-4d1a-8f48-7600cfb377f8/cha-panela-rose.png",
+    "price": 170.0
+  },
+  {
+    "id": "JPM_NEW_21",
+    "title": "Preto e Branco Laços",
+    "description": "Kit de festa Pegue e Monte tema Preto e Branco Laços. Inclui itens decorativos para sua festa em Goianésia - GO.",
+    "image": "/__l5e/assets-v1/15d685a3-6390-4185-855b-4ba9d1913565/preto-branco-lacos.png",
+    "price": 170.0
+  },
+  {
+    "id": "JPM_NEW_22",
+    "title": "Happy Birthday Elegance",
+    "description": "Kit de festa Pegue e Monte tema Happy Birthday Elegance. Inclui itens decorativos para sua festa em Goianésia - GO.",
+    "image": "/__l5e/assets-v1/854eae79-e522-47e9-9bff-ef6bc46ed483/happy-birthday-elegance.png",
+    "price": 170.0
+  },
+  {
+    "id": "JPM_NEW_23",
+    "title": "Azul e Branco",
+    "description": "Kit de festa Pegue e Monte tema Azul e Branco. Inclui itens decorativos para sua festa em Goianésia - GO.",
+    "image": "/__l5e/assets-v1/df6dcb6c-d9af-4f5a-9895-983e4b955216/azul-branco.png",
     "price": 170.0
   }
 ]
