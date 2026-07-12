@@ -495,4 +495,68 @@
     "image": "/__l5e/assets-v1/72cbc884-2ce4-4032-8bea-206cab604ef0/fadinha-encantada.jpg",
     "price": 170.0
   }
+  ,
+  {
+    "id": "JPM_NEW_26",
+    "title": "Moranguinho Baby",
+    "description": "Kit de festa Pegue e Monte tema Moranguinho Baby. Inclui itens decorativos para sua festa em Goianésia - GO.",
+    "image": "/__l5e/assets-v1/6054f9aa-13de-4ad1-8ad4-d289ac3cc230/moranguinho-baby.png",
+    "price": 170.0
+  },
+  {
+    "id": "JPM_NEW_27",
+    "title": "Bobbie Goods Azul",
+    "description": "Kit de festa Pegue e Monte tema Bobbie Goods Azul. Inclui itens decorativos para sua festa em Goianésia - GO.",
+    "image": "/__l5e/assets-v1/dbe031a0-c5c4-46ed-9597-5f2213f80cd2/bobbie-goods-azul.jpg",
+    "price": 170.0
+  },
+  {
+    "id": "JPM_NEW_28",
+    "title": "Vermelho Rústico",
+    "description": "Kit de festa Pegue e Monte tema Vermelho Rústico. Inclui itens decorativos para sua festa em Goianésia - GO.",
+    "image": "/__l5e/assets-v1/b25ef09f-84e0-4700-ac76-e0ff0286edf2/vermelho-rustico.jpg",
+    "price": 170.0
+  },
+  {
+    "id": "JPM_NEW_29",
+    "title": "Happy Birthday Verde",
+    "description": "Kit de festa Pegue e Monte tema Happy Birthday Verde. Inclui itens decorativos para sua festa em Goianésia - GO.",
+    "image": "/__l5e/assets-v1/69b80b39-f854-4295-b21d-e102573307d9/happy-birthday-verde.jpg",
+    "price": 170.0
+  },
+  {
+    "id": "JPM_NEW_30",
+    "title": "Baby Ursinho",
+    "description": "Kit de festa Pegue e Monte tema Baby Ursinho. Inclui itens decorativos para sua festa em Goianésia - GO.",
+    "image": "/__l5e/assets-v1/c55cafa4-449f-4906-8dba-43b2a6747d45/baby-ursinho.jpg",
+    "price": 170.0
+  },
+  {
+    "id": "JPM_NEW_31",
+    "title": "Princesas com Laço",
+    "description": "Kit de festa Pegue e Monte tema Princesas com Laço. Inclui itens decorativos para sua festa em Goianésia - GO.",
+    "image": "/__l5e/assets-v1/f5306008-e7b3-466e-9c79-69b2e73d4a3e/princesas-laco.jpg",
+    "price": 170.0
+  },
+  {
+    "id": "JPM_NEW_32",
+    "title": "Princesas Cinderela",
+    "description": "Kit de festa Pegue e Monte tema Princesas Cinderela. Inclui itens decorativos para sua festa em Goianésia - GO.",
+    "image": "/__l5e/assets-v1/9a826859-d676-4bb6-ae82-933b94b369cd/princesas-cinderela.jpg",
+    "price": 170.0
+  },
+  {
+    "id": "JPM_NEW_33",
+    "title": "Hot Wheels Azul",
+    "description": "Kit de festa Pegue e Monte tema Hot Wheels Azul. Inclui itens decorativos para sua festa em Goianésia - GO.",
+    "image": "/__l5e/assets-v1/759e13f8-2552-4892-96aa-a5a7a031c697/hot-wheels-azul.jpg",
+    "price": 170.0
+  },
+  {
+    "id": "JPM_NEW_34",
+    "title": "Minnie Borboletas Rosa",
+    "description": "Kit de festa Pegue e Monte tema Minnie Borboletas Rosa. Inclui itens decorativos para sua festa em Goianésia - GO.",
+    "image": "/__l5e/assets-v1/14bff4bc-7e70-4ed8-b559-163796324b29/minnie-borboletas-rosa.jpg",
+    "price": 170.0
+  }
 ]
