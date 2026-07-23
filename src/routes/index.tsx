@@ -240,6 +240,12 @@ function Index() {
               >
                 Ver kits
               </a>
+              <Link
+                to="/simulador"
+                className="rounded-full bg-secondary px-5 py-3 text-sm font-semibold text-secondary-foreground shadow hover:opacity-90"
+              >
+                🎨 Simulador Pegue e Monte
+              </Link>
               <a
                 href="#simulador"
                 className="rounded-full border border-primary/30 bg-card px-5 py-3 text-sm font-semibold text-primary hover:bg-primary/5"

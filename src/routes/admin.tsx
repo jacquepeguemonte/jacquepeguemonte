@@ -13,6 +13,22 @@ import {
   type Product,
   type ProductOverride,
 } from "@/lib/catalog";
+import {
+  CAMADA_LABELS,
+  createPeca,
+  createTema,
+  deletePeca,
+  deleteTema,
+  removeStorage,
+  subscribePecas,
+  subscribeTemas,
+  updatePeca,
+  updateTema,
+  uploadImage,
+  type Peca,
+  type PecaCategoria,
+  type Tema,
+} from "@/lib/firebase-catalog";
 
 const ADMIN_PASSWORD = "3282";
 const SESSION_KEY = "jpm_admin_session";
@@ -38,6 +54,9 @@ function Admin() {
   const [overrides, setOverrides] = useState<Record<string, ProductOverride>>({});
   const [custom, setCustom] = useState<Product[]>([]);
   const [editingId, setEditingId] = useState<string | null>(null);
+  const [tab, setTab] = useState<"kits" | "temas" | "pecas">("kits");
+  const [temas, setTemas] = useState<Tema[]>([]);
+  const [pecas, setPecas] = useState<Peca[]>([]);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -45,6 +64,16 @@ function Admin() {
     setOverrides(loadOverrides());
     setCustom(loadCustom());
   }, []);
+
+  useEffect(() => {
+    if (!authed) return;
+    const u1 = subscribeTemas(setTemas);
+    const u2 = subscribePecas(setPecas);
+    return () => {
+      u1();
+      u2();
+    };
+  }, [authed]);
 
   const tryLogin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -216,8 +245,33 @@ function Admin() {
             </Link>
           </div>
         </div>
+        <div className="mx-auto flex max-w-6xl gap-1 border-t border-border px-4 sm:px-6">
+          {(
+            [
+              ["kits", "Kits (catálogo)"],
+              ["temas", "Temas (simulador)"],
+              ["pecas", "Peças (simulador)"],
+            ] as const
+          ).map(([id, label]) => (
+            <button
+              key={id}
+              onClick={() => setTab(id)}
+              className={`border-b-2 px-3 py-2 text-xs font-semibold ${
+                tab === id
+                  ? "border-primary text-primary"
+                  : "border-transparent text-muted-foreground"
+              }`}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
       </header>
       <main className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
+        {tab === "temas" && <TemasAdmin temas={temas} />}
+        {tab === "pecas" && <PecasAdmin pecas={pecas} />}
+        {tab === "kits" && (
+          <>
         <p className="mb-4 text-xs text-muted-foreground">
           {merged.length} {merged.length === 1 ? "tema visível" : "temas visíveis"} no site.
         </p>
@@ -337,7 +391,249 @@ function Admin() {
             );
           })}
         </ul>
+          </>
+        )}
       </main>
+    </div>
+  );
+}
+
+// ---------- Temas (Firestore) ----------
+function TemasAdmin({ temas }: { temas: Tema[] }) {
+  const [nome, setNome] = useState("");
+  const [file, setFile] = useState<File | null>(null);
+  const [busy, setBusy] = useState(false);
+
+  const create = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!nome || !file) return;
+    setBusy(true);
+    try {
+      const { url } = await uploadImage("temas", file);
+      await createTema({ nome, foto_inspiracao: url });
+      setNome("");
+      setFile(null);
+    } catch (err) {
+      alert("Erro ao salvar tema: " + (err as Error).message);
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  return (
+    <div className="space-y-6">
+      <form onSubmit={create} className="rounded-xl border border-border bg-card p-4">
+        <h2 className="text-sm font-bold text-foreground">Novo tema de inspiração</h2>
+        <div className="mt-3 grid gap-3 sm:grid-cols-[1fr_1fr_auto]">
+          <input
+            value={nome}
+            onChange={(e) => setNome(e.target.value)}
+            placeholder="Nome do tema"
+            className="rounded-md border border-input bg-background px-3 py-2 text-sm"
+          />
+          <input
+            type="file"
+            accept="image/*"
+            onChange={(e) => setFile(e.target.files?.[0] ?? null)}
+            className="text-xs"
+          />
+          <button
+            type="submit"
+            disabled={busy || !nome || !file}
+            className="rounded-md bg-primary px-3 py-2 text-xs font-semibold text-primary-foreground hover:opacity-90 disabled:opacity-50"
+          >
+            {busy ? "Enviando…" : "Cadastrar"}
+          </button>
+        </div>
+      </form>
+
+      <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {temas.map((t) => (
+          <li
+            key={t.id}
+            className="overflow-hidden rounded-xl border border-border bg-card"
+          >
+            <img
+              src={t.foto_inspiracao}
+              alt={t.nome}
+              className="h-32 w-full object-cover"
+            />
+            <div className="flex items-center justify-between gap-2 p-3">
+              <input
+                defaultValue={t.nome}
+                onBlur={(e) => {
+                  if (e.target.value !== t.nome)
+                    updateTema(t.id, { nome: e.target.value });
+                }}
+                className="w-full rounded-md border border-input bg-background px-2 py-1 text-sm"
+              />
+              <button
+                onClick={() => {
+                  if (confirm(`Remover tema "${t.nome}"?`)) deleteTema(t.id);
+                }}
+                className="rounded-md border border-destructive/40 px-2 py-1 text-xs text-destructive hover:bg-destructive/10"
+              >
+                ✕
+              </button>
+            </div>
+          </li>
+        ))}
+        {temas.length === 0 && (
+          <p className="text-xs text-muted-foreground">Nenhum tema cadastrado.</p>
+        )}
+      </ul>
+    </div>
+  );
+}
+
+// ---------- Peças (Firestore + Storage) ----------
+function PecasAdmin({ pecas }: { pecas: Peca[] }) {
+  const [nome, setNome] = useState("");
+  const [categoria, setCategoria] = useState<PecaCategoria>("Mobiliario");
+  const [camada, setCamada] = useState<1 | 2 | 3 | 4>(3);
+  const [file, setFile] = useState<File | null>(null);
+  const [busy, setBusy] = useState(false);
+
+  const create = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!nome || !file) return;
+    setBusy(true);
+    try {
+      const { url, path } = await uploadImage("pecas", file);
+      await createPeca({
+        nome,
+        categoria,
+        camada_z: camada,
+        foto_png: url,
+        storage_path: path,
+      });
+      setNome("");
+      setFile(null);
+    } catch (err) {
+      alert("Erro ao salvar peça: " + (err as Error).message);
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  return (
+    <div className="space-y-6">
+      <form onSubmit={create} className="rounded-xl border border-border bg-card p-4">
+        <h2 className="text-sm font-bold text-foreground">Nova peça</h2>
+        <p className="mt-1 text-[11px] text-muted-foreground">
+          Use PNG com fundo transparente para melhor resultado no palco.
+        </p>
+        <div className="mt-3 grid gap-3 sm:grid-cols-2">
+          <input
+            value={nome}
+            onChange={(e) => setNome(e.target.value)}
+            placeholder="Nome (ex: Cilindro dourado)"
+            className="rounded-md border border-input bg-background px-3 py-2 text-sm"
+          />
+          <select
+            value={categoria}
+            onChange={(e) => setCategoria(e.target.value as PecaCategoria)}
+            className="rounded-md border border-input bg-background px-3 py-2 text-sm"
+          >
+            <option value="Mobiliario">Mobiliário</option>
+            <option value="Decoracao">Decoração</option>
+            <option value="Baloes">Balões</option>
+          </select>
+          <select
+            value={camada}
+            onChange={(e) => setCamada(Number(e.target.value) as 1 | 2 | 3 | 4)}
+            className="rounded-md border border-input bg-background px-3 py-2 text-sm"
+          >
+            {[1, 2, 3, 4].map((z) => (
+              <option key={z} value={z}>
+                {CAMADA_LABELS[z]}
+              </option>
+            ))}
+          </select>
+          <input
+            type="file"
+            accept="image/png,image/webp,image/*"
+            onChange={(e) => setFile(e.target.files?.[0] ?? null)}
+            className="text-xs"
+          />
+        </div>
+        <button
+          type="submit"
+          disabled={busy || !nome || !file}
+          className="mt-3 rounded-md bg-primary px-3 py-2 text-xs font-semibold text-primary-foreground hover:opacity-90 disabled:opacity-50"
+        >
+          {busy ? "Enviando…" : "Cadastrar peça"}
+        </button>
+      </form>
+
+      <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {pecas.map((p) => (
+          <li
+            key={p.id}
+            className="flex gap-3 rounded-xl border border-border bg-card p-3"
+          >
+            <div className="grid h-20 w-20 flex-shrink-0 place-items-center rounded-md bg-muted">
+              <img src={p.foto_png} alt={p.nome} className="max-h-full max-w-full" />
+            </div>
+            <div className="min-w-0 flex-1 space-y-1">
+              <input
+                defaultValue={p.nome}
+                onBlur={(e) => {
+                  if (e.target.value !== p.nome)
+                    updatePeca(p.id, { nome: e.target.value });
+                }}
+                className="w-full rounded-md border border-input bg-background px-2 py-1 text-sm font-medium"
+              />
+              <div className="flex gap-2">
+                <select
+                  defaultValue={p.categoria}
+                  onChange={(e) =>
+                    updatePeca(p.id, {
+                      categoria: e.target.value as PecaCategoria,
+                    })
+                  }
+                  className="rounded-md border border-input bg-background px-1 py-1 text-[11px]"
+                >
+                  <option value="Mobiliario">Mobiliário</option>
+                  <option value="Decoracao">Decoração</option>
+                  <option value="Baloes">Balões</option>
+                </select>
+                <select
+                  defaultValue={p.camada_z}
+                  onChange={(e) =>
+                    updatePeca(p.id, {
+                      camada_z: Number(e.target.value) as 1 | 2 | 3 | 4,
+                    })
+                  }
+                  className="rounded-md border border-input bg-background px-1 py-1 text-[11px]"
+                >
+                  {[1, 2, 3, 4].map((z) => (
+                    <option key={z} value={z}>
+                      Camada {z}
+                    </option>
+                  ))}
+                </select>
+                <button
+                  onClick={async () => {
+                    if (!confirm(`Remover "${p.nome}"?`)) return;
+                    await removeStorage(p.storage_path);
+                    await deletePeca(p.id);
+                  }}
+                  className="ml-auto rounded-md border border-destructive/40 px-2 py-1 text-[11px] text-destructive hover:bg-destructive/10"
+                >
+                  ✕
+                </button>
+              </div>
+            </div>
+          </li>
+        ))}
+        {pecas.length === 0 && (
+          <p className="text-xs text-muted-foreground">
+            Nenhuma peça cadastrada. Cadastre PNGs com fundo transparente para
+            que apareçam no simulador.
+          </p>
+        )}
+      </ul>
     </div>
   );
 }
