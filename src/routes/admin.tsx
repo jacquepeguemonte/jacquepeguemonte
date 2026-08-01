@@ -243,6 +243,12 @@ function Admin() {
             >
               Ver site
             </Link>
+            <Link
+              to="/admin/recorte-ia"
+              className="rounded-md border border-primary/40 px-3 py-1.5 text-xs font-semibold text-primary hover:bg-primary/5"
+            >
+              Recorte IA
+            </Link>
           </div>
         </div>
         <div className="mx-auto flex max-w-6xl gap-1 border-t border-border px-4 sm:px-6">

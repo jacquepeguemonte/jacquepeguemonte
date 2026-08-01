@@ -13,6 +13,7 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SimuladorRouteImport } from './routes/simulador'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminRecorteIaRouteImport } from './routes/admin_.recorte-ia'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -34,18 +35,25 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRecorteIaRoute = AdminRecorteIaRouteImport.update({
+  id: '/admin_/recorte-ia',
+  path: '/admin/recorte-ia',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/simulador': typeof SimuladorRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/admin/recorte-ia': typeof AdminRecorteIaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/simulador': typeof SimuladorRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/admin/recorte-ia': typeof AdminRecorteIaRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,13 +61,25 @@ export interface FileRoutesById {
   '/admin': typeof AdminRoute
   '/simulador': typeof SimuladorRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/admin_/recorte-ia': typeof AdminRecorteIaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/admin' | '/simulador' | '/sitemap.xml'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/simulador'
+    | '/sitemap.xml'
+    | '/admin/recorte-ia'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/admin' | '/simulador' | '/sitemap.xml'
-  id: '__root__' | '/' | '/admin' | '/simulador' | '/sitemap.xml'
+  to: '/' | '/admin' | '/simulador' | '/sitemap.xml' | '/admin/recorte-ia'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/simulador'
+    | '/sitemap.xml'
+    | '/admin_/recorte-ia'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -67,6 +87,7 @@ export interface RootRouteChildren {
   AdminRoute: typeof AdminRoute
   SimuladorRoute: typeof SimuladorRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  AdminRecorteIaRoute: typeof AdminRecorteIaRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -99,6 +120,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin_/recorte-ia': {
+      id: '/admin_/recorte-ia'
+      path: '/admin/recorte-ia'
+      fullPath: '/admin/recorte-ia'
+      preLoaderRoute: typeof AdminRecorteIaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -107,6 +135,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminRoute: AdminRoute,
   SimuladorRoute: SimuladorRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  AdminRecorteIaRoute: AdminRecorteIaRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
