@@ -114,7 +114,7 @@ function Index() {
 
   const sendBudget = () => {
     const lines = cart.flatMap((i) => [
-      `• ${i.qty}x ${i.title} — ${brl(i.qty * i.price)}`,
+      `• ${i.qty}x ${i.title} — a partir de ${brl(i.qty * i.price)}`,
       ...i.items.map((it) => `   - ${it}`),
     ]);
     const msg = [
@@ -122,7 +122,8 @@ function Index() {
       "",
       ...lines,
       "",
-      `Total estimado: ${brl(total)}`,
+      `Total estimado a partir de: ${brl(total)}`,
+      "Balões não incluso",
     ].join("\n");
     window.open(
       `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`,
@@ -303,7 +304,15 @@ function Index() {
               </div>
               <div className="flex flex-1 flex-col gap-2 p-4">
                 <h3 className="text-sm font-semibold text-foreground">{p.title}</h3>
-                <p className="text-base font-bold text-primary">{brl(p.price)}</p>
+                <p className="text-base font-bold text-primary">
+                  <span className="text-xs font-medium text-muted-foreground">
+                    a partir de{" "}
+                  </span>
+                  {brl(p.price)}
+                </p>
+                <p className="text-[11px] text-muted-foreground">
+                  Balões não incluso
+                </p>
                 <div className="mt-auto flex items-center justify-between gap-2">
                   <div className="flex items-center rounded-md border border-border">
                     <button
@@ -370,7 +379,7 @@ function Index() {
                         {i.qty}× {i.title}
                       </span>
                       <span className="font-semibold text-foreground">
-                        {brl(i.qty * i.price)}
+                        a partir de {brl(i.qty * i.price)}
                       </span>
                     </div>
                     {i.items.length > 0 && (
@@ -391,7 +400,11 @@ function Index() {
             )}
             <div className="mt-4 flex flex-col gap-3 border-t border-border pt-4 sm:flex-row sm:items-center sm:justify-between">
               <div className="text-lg font-bold text-foreground">
-                Total: <span className="text-primary">{brl(total)}</span>
+                Total a partir de:{" "}
+                <span className="text-primary">{brl(total)}</span>
+                <span className="block text-xs font-normal text-muted-foreground">
+                  Balões não incluso
+                </span>
               </div>
               <button
                 type="button"
