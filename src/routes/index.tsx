@@ -114,7 +114,7 @@ function Index() {
 
   const sendBudget = () => {
     const lines = cart.flatMap((i) => [
-      `• ${i.qty}x ${i.title} — ${brl(i.qty * i.price)}`,
+      `• ${i.qty}x ${i.title} — a partir de ${brl(i.qty * i.price)}`,
       ...i.items.map((it) => `   - ${it}`),
     ]);
     const msg = [
@@ -122,7 +122,8 @@ function Index() {
       "",
       ...lines,
       "",
-      `Total estimado: ${brl(total)}`,
+      `Total estimado a partir de: ${brl(total)}`,
+      "Balões não incluso",
     ].join("\n");
     window.open(
       `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`,
