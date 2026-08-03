@@ -11,7 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SimuladorRouteImport } from './routes/simulador'
-import { Route as GooglesplatRouteImport } from './routes/google$'
+import { Route as GoogleChar123Char125RouteImport } from './routes/google{$}'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminRecorteIaRouteImport } from './routes/admin_.recorte-ia'
@@ -26,9 +26,9 @@ const SimuladorRoute = SimuladorRouteImport.update({
   path: '/simulador',
   getParentRoute: () => rootRouteImport,
 } as any)
-const GooglesplatRoute = GooglesplatRouteImport.update({
-  id: '/google$',
-  path: '/google$',
+const GoogleChar123Char125Route = GoogleChar123Char125RouteImport.update({
+  id: '/google{$}',
+  path: '/google{$}',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminRoute = AdminRouteImport.update({
@@ -50,7 +50,7 @@ const AdminRecorteIaRoute = AdminRecorteIaRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
-  '/google$': typeof GooglesplatRoute
+  '/google{$}': typeof GoogleChar123Char125Route
   '/simulador': typeof SimuladorRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/recorte-ia': typeof AdminRecorteIaRoute
@@ -58,7 +58,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
-  '/google$': typeof GooglesplatRoute
+  '/google{$}': typeof GoogleChar123Char125Route
   '/simulador': typeof SimuladorRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/recorte-ia': typeof AdminRecorteIaRoute
@@ -67,7 +67,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
-  '/google$': typeof GooglesplatRoute
+  '/google{$}': typeof GoogleChar123Char125Route
   '/simulador': typeof SimuladorRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin_/recorte-ia': typeof AdminRecorteIaRoute
@@ -77,7 +77,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/admin'
-    | '/google$'
+    | '/google{$}'
     | '/simulador'
     | '/sitemap.xml'
     | '/admin/recorte-ia'
@@ -85,7 +85,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/admin'
-    | '/google$'
+    | '/google{$}'
     | '/simulador'
     | '/sitemap.xml'
     | '/admin/recorte-ia'
@@ -93,7 +93,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/admin'
-    | '/google$'
+    | '/google{$}'
     | '/simulador'
     | '/sitemap.xml'
     | '/admin_/recorte-ia'
@@ -102,7 +102,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRoute
-  GooglesplatRoute: typeof GooglesplatRoute
+  GoogleChar123Char125Route: typeof GoogleChar123Char125Route
   SimuladorRoute: typeof SimuladorRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   AdminRecorteIaRoute: typeof AdminRecorteIaRoute
@@ -124,11 +124,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SimuladorRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/google$': {
-      id: '/google$'
-      path: '/google$'
-      fullPath: '/google$'
-      preLoaderRoute: typeof GooglesplatRouteImport
+    '/google{$}': {
+      id: '/google{$}'
+      path: '/google{$}'
+      fullPath: '/google{$}'
+      preLoaderRoute: typeof GoogleChar123Char125RouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin': {
@@ -158,7 +158,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRoute,
-  GooglesplatRoute: GooglesplatRoute,
+  GoogleChar123Char125Route: GoogleChar123Char125Route,
   SimuladorRoute: SimuladorRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   AdminRecorteIaRoute: AdminRecorteIaRoute,
