@@ -3,7 +3,7 @@ import type {} from "@tanstack/react-start";
 
 // Serve o arquivo de verificação do Google Search Console (googleXXXX.html)
 // diretamente na raiz do site, sem precisar subir o arquivo manualmente.
-export const Route = createFileRoute("/google$")({
+export const Route = createFileRoute("/google{$}")({
   server: {
     handlers: {
       GET: async ({ params }) => {
