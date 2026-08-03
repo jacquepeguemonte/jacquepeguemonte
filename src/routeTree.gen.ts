@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SimuladorRouteImport } from './routes/simulador'
+import { Route as GooglesplatRouteImport } from './routes/google$'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminRecorteIaRouteImport } from './routes/admin_.recorte-ia'
@@ -23,6 +24,11 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
 const SimuladorRoute = SimuladorRouteImport.update({
   id: '/simulador',
   path: '/simulador',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GooglesplatRoute = GooglesplatRouteImport.update({
+  id: '/google$',
+  path: '/google$',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminRoute = AdminRouteImport.update({
@@ -44,6 +50,7 @@ const AdminRecorteIaRoute = AdminRecorteIaRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
+  '/google$': typeof GooglesplatRoute
   '/simulador': typeof SimuladorRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/recorte-ia': typeof AdminRecorteIaRoute
@@ -51,6 +58,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
+  '/google$': typeof GooglesplatRoute
   '/simulador': typeof SimuladorRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/recorte-ia': typeof AdminRecorteIaRoute
@@ -59,6 +67,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
+  '/google$': typeof GooglesplatRoute
   '/simulador': typeof SimuladorRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin_/recorte-ia': typeof AdminRecorteIaRoute
@@ -68,15 +77,23 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/admin'
+    | '/google$'
     | '/simulador'
     | '/sitemap.xml'
     | '/admin/recorte-ia'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/admin' | '/simulador' | '/sitemap.xml' | '/admin/recorte-ia'
+  to:
+    | '/'
+    | '/admin'
+    | '/google$'
+    | '/simulador'
+    | '/sitemap.xml'
+    | '/admin/recorte-ia'
   id:
     | '__root__'
     | '/'
     | '/admin'
+    | '/google$'
     | '/simulador'
     | '/sitemap.xml'
     | '/admin_/recorte-ia'
@@ -85,6 +102,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRoute
+  GooglesplatRoute: typeof GooglesplatRoute
   SimuladorRoute: typeof SimuladorRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   AdminRecorteIaRoute: typeof AdminRecorteIaRoute
@@ -104,6 +122,13 @@ declare module '@tanstack/react-router' {
       path: '/simulador'
       fullPath: '/simulador'
       preLoaderRoute: typeof SimuladorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/google$': {
+      id: '/google$'
+      path: '/google$'
+      fullPath: '/google$'
+      preLoaderRoute: typeof GooglesplatRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin': {
@@ -133,6 +158,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRoute,
+  GooglesplatRoute: GooglesplatRoute,
   SimuladorRoute: SimuladorRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   AdminRecorteIaRoute: AdminRecorteIaRoute,
