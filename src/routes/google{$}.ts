@@ -11,7 +11,7 @@ export const Route = createFileRoute("/google{$}")({
         const fileName = `google${rest}`;
 
         // Só responde a nomes válidos: google<token>.html
-        if (!/^google[a-z0-9]+\.html$/i.test(fileName)) {
+        if (!/^google[a-z0-9_-]+\.html$/i.test(fileName)) {
           return new Response("Not Found", { status: 404 });
         }
 
