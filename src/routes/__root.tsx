@@ -81,7 +81,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "description", content: "Monte a festa dos seus sonhos de forma prática e econômica. Kits Pegue e Monte em Goianésia - GO." },
       { name: "author", content: "Jacque Pegue & Monte" },
       { name: "p:domain_verify", content: "584b8348f60365f9093c5bb1414fa83b" },
-      { name: "google-site-verification", content: "zy0ln2IIm6ODI_AYA6DXIkIvs3-3xtu2S8fN5CdAkcw" },
+      { name: "google-site-verification", content: "nsxUnvzPK-DBbtMe5pG8Ws_SxoI2bmKq1lZbTjHZP58" },
       { property: "og:title", content: "Jacque Pegue & Monte | Decoração de Festa em Goianésia" },
       { property: "og:description", content: "Monte a festa dos seus sonhos de forma prática e econômica. Kits Pegue e Monte em Goianésia - GO." },
       { property: "og:type", content: "website" },
