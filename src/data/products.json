@@ -620,5 +620,19 @@
     "description": "Kit de festa Pegue e Monte tema Balões Inauguração. Inclui itens decorativos para sua festa em Goianésia - GO.",
     "image": "/__l5e/assets-v1/772e314d-7a54-4d40-ad4d-8e522f0fd3b0/Baloes_Inauguracao.jpeg",
     "price": 170
+  },
+  {
+    "id": "JPM_NEW_50",
+    "title": "Formatura Direito Marsala e Dourado",
+    "description": "Kit de festa Pegue e Monte tema Formatura Direito Marsala e Dourado. Inclui itens decorativos para sua festa em Goianésia - GO.",
+    "image": "/__l5e/assets-v1/082cb31c-4de2-468b-a48d-f034b2f2776c/formatura-direito.jpg",
+    "price": 170
+  },
+  {
+    "id": "JPM_NEW_51",
+    "title": "Cowboy Rosa e Verde",
+    "description": "Kit de festa Pegue e Monte tema Cowboy Rosa e Verde. Inclui itens decorativos para sua festa em Goianésia - GO.",
+    "image": "/__l5e/assets-v1/da867f73-ff67-4840-a98e-3c2c8ad0468a/cowboy-rosa.jpg",
+    "price": 170
   }
 ]
