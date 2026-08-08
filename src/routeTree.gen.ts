@@ -13,6 +13,7 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SimuladorRouteImport } from './routes/simulador'
 import { Route as GoogleChar123Char125RouteImport } from './routes/google{$}'
 import { Route as AdminRouteImport } from './routes/admin'
+import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminRecorteIaRouteImport } from './routes/admin_.recorte-ia'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -35,6 +36,11 @@ const AdminRoute = AdminRouteImport.update({
   path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminRecorteIaRoute = AdminRecorteIaRouteImport.update({
   id: '/admin_/recorte-ia',
   path: '/admin/recorte-ia',
@@ -42,6 +48,7 @@ const AdminRecorteIaRoute = AdminRecorteIaRouteImport.update({
 } as any)
 
 export interface FileRoutesByFullPath {
+  '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/google{$}': typeof GoogleChar123Char125Route
   '/simulador': typeof SimuladorRoute
@@ -49,6 +56,7 @@ export interface FileRoutesByFullPath {
   '/admin/recorte-ia': typeof AdminRecorteIaRoute
 }
 export interface FileRoutesByTo {
+  '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/google{$}': typeof GoogleChar123Char125Route
   '/simulador': typeof SimuladorRoute
@@ -57,6 +65,7 @@ export interface FileRoutesByTo {
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
+  '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/google{$}': typeof GoogleChar123Char125Route
   '/simulador': typeof SimuladorRoute
@@ -66,6 +75,7 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
+    | '/'
     | '/admin'
     | '/google{$}'
     | '/simulador'
@@ -73,6 +83,7 @@ export interface FileRouteTypes {
     | '/admin/recorte-ia'
   fileRoutesByTo: FileRoutesByTo
   to:
+    | '/'
     | '/admin'
     | '/google{$}'
     | '/simulador'
@@ -80,6 +91,7 @@ export interface FileRouteTypes {
     | '/admin/recorte-ia'
   id:
     | '__root__'
+    | '/'
     | '/admin'
     | '/google{$}'
     | '/simulador'
@@ -88,6 +100,7 @@ export interface FileRouteTypes {
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
+  IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRoute
   GoogleChar123Char125Route: typeof GoogleChar123Char125Route
   SimuladorRoute: typeof SimuladorRoute
@@ -125,6 +138,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin_/recorte-ia': {
       id: '/admin_/recorte-ia'
       path: '/admin/recorte-ia'
@@ -136,6 +156,7 @@ declare module '@tanstack/react-router' {
 }
 
 const rootRouteChildren: RootRouteChildren = {
+  IndexRoute: IndexRoute,
   AdminRoute: AdminRoute,
   GoogleChar123Char125Route: GoogleChar123Char125Route,
   SimuladorRoute: SimuladorRoute,
@@ -145,3 +166,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
