@@ -42,14 +42,8 @@ export const Route = createFileRoute("/")({
             postalCode: "76380-000",
             addressCountry: "BR",
           },
-          openingHoursSpecification: [
-            {
-              "@type": "OpeningHoursSpecification",
-              dayOfWeek: "Saturday",
-              opens: "08:30",
-              closes: "11:30",
-            },
-          ],
+          availableService: "Retiradas agendadas",
+
         }),
       },
     ],
@@ -70,7 +64,7 @@ const HOW_IT_WORKS = [
   { step: "1", title: "Escolha o tema", text: "Navegue pelas categorias e selecione os kits que combinam com a sua festa." },
   { step: "2", title: "Simule o orçamento", text: "Monte a lista, veja o valor estimado e envie tudo direto no WhatsApp." },
   { step: "3", title: "Reserve a data", text: "Confirmamos a disponibilidade e reservamos o kit para o seu evento." },
-  { step: "4", title: "Retire ou receba", text: "Retiradas aos sábados, 08:30 às 11:30, ou contrate a Entrega Segura." },
+  { step: "4", title: "Retire ou receba", text: "Retiradas agendadas ou contrate a Entrega Segura." },
 ];
 
 function Index() {
@@ -304,7 +298,7 @@ function Index() {
                 {[
                   { k: "Temas", v: `${catalog.length}+` },
                   { k: "Cidade", v: "Goianésia" },
-                  { k: "Retiradas", v: "Sábados" },
+                  { k: "Retiradas", v: "Agendadas" },
                 ].map((s) => (
                   <div key={s.k} className="rounded-2xl border border-border bg-card/80 px-3 py-3">
                     <dt className="text-[11px] uppercase tracking-wide text-muted-foreground">{s.k}</dt>
@@ -751,8 +745,9 @@ function Index() {
                 Funcionamento
               </h3>
               <p className="mt-2 text-sm text-foreground">
-                Retiradas agendadas aos sábados, das <strong>08:30 às 11:30</strong>.
+                <strong>Retiradas agendadas.</strong>
               </p>
+
               <p className="mt-2 text-xs text-muted-foreground">
                 Consulte nossa taxa opcional de Entrega Segura para bairros locais.
               </p>
@@ -814,7 +809,7 @@ function Index() {
               </li>
               <li>Rua 25, nº 328 — Centro</li>
               <li>Goianésia - GO, 76380-000</li>
-              <li>Retiradas: sábados, 08:30 às 11:30</li>
+              <li>Retiradas agendadas</li>
             </ul>
           </div>
 
