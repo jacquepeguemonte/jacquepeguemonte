@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import logoAsset from "@/assets/logo_jpm.jpeg.asset.json";
 import heroVideoAsset from "@/assets/hero-video.mp4.asset.json";
 import {
+  getProductPhotos,
   loadCustom,
   loadOverrides,
   mergeCatalog,
@@ -75,6 +76,7 @@ function Index() {
   const [selected, setSelected] = useState<Record<string, number>>({});
   const [catalog, setCatalog] = useState<Product[]>([]);
   const [details, setDetails] = useState<Product | null>(null);
+  const [detailPhoto, setDetailPhoto] = useState("");
   const [availability, setAvailability] = useState<Product | null>(null);
   const [availName, setAvailName] = useState("");
   const [availDate, setAvailDate] = useState("");
@@ -143,6 +145,11 @@ function Index() {
     setCategory("todos");
     setMaxPrice(0);
     setSort("recentes");
+  };
+
+  const openDetails = (p: Product) => {
+    setDetails(p);
+    setDetailPhoto(p.image);
   };
 
   const sendBudget = () => {
@@ -444,71 +451,79 @@ function Index() {
             </div>
 
             <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-              {filtered.map((p) => (
-                <li
-                  key={p.id}
-                  className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
-                >
-                  <div className="relative aspect-square overflow-hidden bg-muted">
-                    <img
-                      src={p.image}
-                      alt={p.title}
-                      loading="lazy"
-                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <span className="absolute left-2 top-2 rounded-full bg-gold px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-gold-foreground">
-                      Pegue e Monte
-                    </span>
-                  </div>
-                  <div className="flex flex-1 flex-col gap-2 p-4">
-                    <h3 className="line-clamp-2 text-sm font-semibold text-foreground">{p.title}</h3>
-                    <p className="text-base font-bold text-primary">
-                      <span className="text-xs font-medium text-muted-foreground">a partir de </span>
-                      {brl(p.price)}
-                    </p>
-                    <p className="text-[11px] text-muted-foreground">
-                      📍 {CITY} · Balões não incluso
-                    </p>
-                    <div className="mt-auto space-y-2 pt-2">
-                      <div className="flex items-center justify-between gap-2">
-                        <div className="flex items-center rounded-md border border-border">
+              {filtered.map((p) => {
+                const photoCount = getProductPhotos(p).length;
+                return (
+                  <li
+                    key={p.id}
+                    className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
+                  >
+                    <div className="relative aspect-square overflow-hidden bg-muted">
+                      <img
+                        src={p.image}
+                        alt={p.title}
+                        loading="lazy"
+                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                      <span className="absolute left-2 top-2 rounded-full bg-gold px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-gold-foreground">
+                        Pegue e Monte
+                      </span>
+                      {photoCount > 1 && (
+                        <span className="absolute bottom-2 right-2 rounded-full bg-card/90 px-2 py-0.5 text-[10px] font-bold text-primary shadow-sm">
+                          {photoCount} fotos
+                        </span>
+                      )}
+                    </div>
+                    <div className="flex flex-1 flex-col gap-2 p-4">
+                      <h3 className="line-clamp-2 text-sm font-semibold text-foreground">{p.title}</h3>
+                      <p className="text-base font-bold text-primary">
+                        <span className="text-xs font-medium text-muted-foreground">a partir de </span>
+                        {brl(p.price)}
+                      </p>
+                      <p className="text-[11px] text-muted-foreground">
+                        📍 {CITY} · Balões não incluso
+                      </p>
+                      <div className="mt-auto space-y-2 pt-2">
+                        <div className="flex items-center justify-between gap-2">
+                          <div className="flex items-center rounded-md border border-border">
+                            <button
+                              type="button"
+                              onClick={() => setQty(p.id, -1)}
+                              className="px-2 py-1 text-sm text-foreground hover:bg-muted"
+                              aria-label={`Remover ${p.title}`}
+                            >
+                              −
+                            </button>
+                            <span className="min-w-6 text-center text-sm">{selected[p.id] ?? 0}</span>
+                            <button
+                              type="button"
+                              onClick={() => setQty(p.id, 1)}
+                              className="px-2 py-1 text-sm text-foreground hover:bg-muted"
+                              aria-label={`Adicionar ${p.title}`}
+                            >
+                              +
+                            </button>
+                          </div>
                           <button
                             type="button"
-                            onClick={() => setQty(p.id, -1)}
-                            className="px-2 py-1 text-sm text-foreground hover:bg-muted"
-                            aria-label={`Remover ${p.title}`}
+                            onClick={() => openDetails(p)}
+                            className="rounded-md border border-primary/40 px-3 py-1.5 text-xs font-semibold text-primary hover:bg-primary/5"
                           >
-                            −
-                          </button>
-                          <span className="min-w-6 text-center text-sm">{selected[p.id] ?? 0}</span>
-                          <button
-                            type="button"
-                            onClick={() => setQty(p.id, 1)}
-                            className="px-2 py-1 text-sm text-foreground hover:bg-muted"
-                            aria-label={`Adicionar ${p.title}`}
-                          >
-                            +
+                            Ver detalhes
                           </button>
                         </div>
                         <button
                           type="button"
-                          onClick={() => setDetails(p)}
-                          className="rounded-md border border-primary/40 px-3 py-1.5 text-xs font-semibold text-primary hover:bg-primary/5"
+                          onClick={() => openAvailability(p)}
+                          className="w-full rounded-md bg-primary px-3 py-2 text-xs font-semibold text-primary-foreground hover:opacity-90"
                         >
-                          Ver detalhes
+                          Verificar disponibilidade
                         </button>
                       </div>
-                      <button
-                        type="button"
-                        onClick={() => openAvailability(p)}
-                        className="w-full rounded-md bg-primary px-3 py-2 text-xs font-semibold text-primary-foreground hover:opacity-90"
-                      >
-                        Verificar disponibilidade
-                      </button>
                     </div>
-                  </div>
-                </li>
-              ))}
+                  </li>
+                );
+              })}
             </ul>
 
             {filtered.length === 0 && (
@@ -865,10 +880,31 @@ function Index() {
             className="max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-2xl bg-card p-6 shadow-2xl"
           >
             <img
-              src={details.image}
+              src={detailPhoto || details.image}
               alt={details.title}
               className="aspect-square w-full rounded-xl object-cover"
             />
+            {getProductPhotos(details).length > 1 && (
+              <div className="mt-3 grid grid-cols-4 gap-2">
+                {getProductPhotos(details).map((photo, idx) => (
+                  <button
+                    key={`${photo}-${idx}`}
+                    type="button"
+                    onClick={() => setDetailPhoto(photo)}
+                    className={`aspect-square overflow-hidden rounded-lg border ${
+                      (detailPhoto || details.image) === photo ? "border-primary" : "border-border"
+                    }`}
+                    aria-label={`Ver foto ${idx + 1} de ${details.title}`}
+                  >
+                    <img
+                      src={photo}
+                      alt={`${details.title} - variação ${idx + 1}`}
+                      className="h-full w-full object-cover"
+                    />
+                  </button>
+                ))}
+              </div>
+            )}
             <h3 className="mt-4 text-lg font-bold text-foreground">{details.title}</h3>
             <p className="mt-1 text-base font-bold text-primary">
               <span className="text-xs font-medium text-muted-foreground">a partir de </span>

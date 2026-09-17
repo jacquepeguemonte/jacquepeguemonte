@@ -255,8 +255,11 @@
     "id": "JPM_38",
     "title": "Flamengo",
     "description": "Kit de festa Pegue e Monte tema Flamengo. Inclui itens decorativos para sua festa em Goianésia - GO.",
-    "image": "https://lh3.googleusercontent.com/TvIpoZ_toFxRkb6LqAwpfq0CmXUS_wq41NVTgy2vI6XwrdcqAx6I-E3oXS6hPTzVh8214aewfy4uBBwVYw=w1521",
-    "price": 170
+    "image": "/__l5e/assets-v1/08d775e8-85c3-4c2a-bdf6-2da6fafd9029/flamengo-variacao.jpeg",
+    "price": 170,
+    "photos": [
+      "https://lh3.googleusercontent.com/TvIpoZ_toFxRkb6LqAwpfq0CmXUS_wq41NVTgy2vI6XwrdcqAx6I-E3oXS6hPTzVh8214aewfy4uBBwVYw=w1521"
+    ]
   },
   {
     "id": "JPM_39",
