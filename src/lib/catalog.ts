@@ -5,6 +5,7 @@ export type Product = {
   title: string;
   description: string;
   image: string;
+  photos: string[];
   price: number;
   items: string[];
 };
@@ -24,9 +25,42 @@ export const DEFAULT_ITEMS: string[] = [
   "Itens decorativos do tema",
 ];
 
-const BASE: Product[] = (productsData as Array<Omit<Product, "items"> & { items?: string[] }>)
+type ProductData = Omit<Product, "items" | "photos"> & {
+  items?: string[];
+  photos?: string[];
+};
+
+function normalizePhotos(image: string, photos?: string[]): string[] {
+  const seen = new Set<string>();
+  return (photos ?? [])
+    .map((photo) => photo.trim())
+    .filter((photo) => photo && photo !== image)
+    .filter((photo) => {
+      if (seen.has(photo)) return false;
+      seen.add(photo);
+      return true;
+    });
+}
+
+export function getProductPhotos(product: Pick<Product, "image" | "photos">): string[] {
+  const seen = new Set<string>();
+  return [product.image, ...(product.photos ?? [])]
+    .map((photo) => photo.trim())
+    .filter(Boolean)
+    .filter((photo) => {
+      if (seen.has(photo)) return false;
+      seen.add(photo);
+      return true;
+    });
+}
+
+const BASE: Product[] = (productsData as ProductData[])
   .filter((p) => p.title)
-  .map((p) => ({ ...p, items: p.items ?? DEFAULT_ITEMS }));
+  .map((p) => ({
+    ...p,
+    items: p.items ?? DEFAULT_ITEMS,
+    photos: normalizePhotos(p.image, p.photos),
+  }));
 
 export function getBaseProducts(): Product[] {
   return BASE;
@@ -65,7 +99,11 @@ export function saveOverrides(o: Record<string, ProductOverride>) {
 
 export function loadCustom(): Product[] {
   if (typeof window === "undefined") return [];
-  return safeParse<Product[]>(localStorage.getItem(CUSTOM_KEY), []);
+  return safeParse<ProductData[]>(localStorage.getItem(CUSTOM_KEY), []).map((p) => ({
+    ...p,
+    items: p.items ?? DEFAULT_ITEMS,
+    photos: normalizePhotos(p.image, p.photos),
+  }));
 }
 
 export function saveCustom(c: Product[]) {
@@ -87,6 +125,7 @@ export function mergeCatalog(
       image: o?.image ?? p.image,
       price: o?.price ?? p.price,
       items: o?.items ?? p.items,
+      photos: o?.photos ? normalizePhotos(o.image ?? p.image, o.photos) : p.photos,
     });
   }
   return [...merged, ...custom];
