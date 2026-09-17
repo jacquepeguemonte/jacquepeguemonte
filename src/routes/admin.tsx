@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import {
   DEFAULT_ITEMS,
+  getProductPhotos,
   getBaseProducts,
   isBaseId,
   loadCustom,
@@ -113,6 +114,7 @@ function Admin() {
         image: o.image ?? p.image,
         price: o.price ?? p.price,
         items: o.items ?? p.items,
+        photos: o.photos ?? p.photos,
         hidden: !!o.hidden,
       };
     }),
@@ -158,6 +160,7 @@ function Admin() {
       title: "Novo tema",
       description: "Kit de festa Pegue e Monte.",
       image: "https://placehold.co/600x600?text=Novo+Tema",
+      photos: [],
       price: 170,
       items: [...DEFAULT_ITEMS],
     };
@@ -284,6 +287,7 @@ function Admin() {
         <ul className="space-y-3">
           {adminList.map((p) => {
             const isEditing = editingId === p.id;
+            const allPhotos = getProductPhotos(p);
             return (
               <li
                 key={p.id}
@@ -309,9 +313,49 @@ function Admin() {
                         <input
                           defaultValue={p.image}
                           onBlur={(e) => editProduct(p.id, { image: e.target.value })}
-                          placeholder="URL da imagem"
+                          placeholder="URL da foto principal"
                           className="w-full rounded-md border border-input bg-background px-2 py-1 text-xs"
                         />
+                        <div className="rounded-lg border border-border bg-background p-3">
+                          <label className="block text-xs font-semibold text-foreground">
+                            Fotos extras e variações
+                          </label>
+                          <p className="mt-1 text-[11px] text-muted-foreground">
+                            Envie uma nova foto ou cole uma URL por linha.
+                          </p>
+                          <input
+                            type="file"
+                            accept="image/*"
+                            onChange={async (e) => {
+                              const file = e.target.files?.[0];
+                              e.target.value = "";
+                              if (!file) return;
+                              try {
+                                const { url } = await uploadImage("temas", file);
+                                editProduct(p.id, {
+                                  photos: [...(p.photos ?? []), url],
+                                });
+                              } catch (err) {
+                                alert("Erro ao enviar foto: " + (err as Error).message);
+                              }
+                            }}
+                            className="mt-2 w-full text-xs"
+                          />
+                          <textarea
+                            defaultValue={(p.photos ?? []).join("\n")}
+                            onBlur={(e) =>
+                              editProduct(p.id, {
+                                photos: e.target.value
+                                  .split("\n")
+                                  .map((s) => s.trim())
+                                  .filter(Boolean),
+                              })
+                            }
+                            placeholder="URLs das fotos extras, uma por linha"
+                            rows={3}
+                            className="mt-2 w-full rounded-md border border-input bg-background px-2 py-1 text-xs"
+                          />
+                        </div>
                         <div className="flex items-center gap-2">
                           <span className="text-xs text-muted-foreground">R$</span>
                           <input
@@ -354,8 +398,26 @@ function Admin() {
                         </p>
                         <p className="text-xs text-muted-foreground">
                           R$ {p.price.toFixed(2)} ·{" "}
-                          {p.items.length} {p.items.length === 1 ? "item" : "itens"} inclusos
+                          {p.items.length} {p.items.length === 1 ? "item" : "itens"} inclusos ·{" "}
+                          {allPhotos.length} {allPhotos.length === 1 ? "foto" : "fotos"}
                         </p>
+                        {allPhotos.length > 1 && (
+                          <div className="flex flex-wrap gap-2">
+                            {allPhotos.slice(0, 5).map((photo, i) => (
+                              <img
+                                key={`${photo}-${i}`}
+                                src={photo}
+                                alt={`${p.title} - foto ${i + 1}`}
+                                className="h-12 w-12 rounded-md object-cover"
+                              />
+                            ))}
+                            {allPhotos.length > 5 && (
+                              <span className="grid h-12 w-12 place-items-center rounded-md bg-muted text-[11px] text-muted-foreground">
+                                +{allPhotos.length - 5}
+                              </span>
+                            )}
+                          </div>
+                        )}
                         {p.items.length > 0 && (
                           <ul className="ml-4 list-disc text-xs text-muted-foreground">
                             {p.items.slice(0, 4).map((it, i) => (
