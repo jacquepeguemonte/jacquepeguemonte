@@ -76,6 +76,7 @@ function Index() {
   const [selected, setSelected] = useState<Record<string, number>>({});
   const [catalog, setCatalog] = useState<Product[]>([]);
   const [details, setDetails] = useState<Product | null>(null);
+  const [detailPhoto, setDetailPhoto] = useState("");
   const [availability, setAvailability] = useState<Product | null>(null);
   const [availName, setAvailName] = useState("");
   const [availDate, setAvailDate] = useState("");
@@ -144,6 +145,11 @@ function Index() {
     setCategory("todos");
     setMaxPrice(0);
     setSort("recentes");
+  };
+
+  const openDetails = (p: Product) => {
+    setDetails(p);
+    setDetailPhoto(p.image);
   };
 
   const sendBudget = () => {
@@ -500,7 +506,7 @@ function Index() {
                           </div>
                           <button
                             type="button"
-                            onClick={() => setDetails(p)}
+                            onClick={() => openDetails(p)}
                             className="rounded-md border border-primary/40 px-3 py-1.5 text-xs font-semibold text-primary hover:bg-primary/5"
                           >
                             Ver detalhes
@@ -874,7 +880,7 @@ function Index() {
             className="max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-2xl bg-card p-6 shadow-2xl"
           >
             <img
-              src={details.image}
+              src={detailPhoto || details.image}
               alt={details.title}
               className="aspect-square w-full rounded-xl object-cover"
             />
@@ -884,9 +890,9 @@ function Index() {
                   <button
                     key={`${photo}-${idx}`}
                     type="button"
-                    onClick={() => setDetails({ ...details, image: photo })}
+                    onClick={() => setDetailPhoto(photo)}
                     className={`aspect-square overflow-hidden rounded-lg border ${
-                      details.image === photo ? "border-primary" : "border-border"
+                      (detailPhoto || details.image) === photo ? "border-primary" : "border-border"
                     }`}
                     aria-label={`Ver foto ${idx + 1} de ${details.title}`}
                   >
