@@ -1,0 +1,115 @@
+{
+  "version": 1,
+  "sdk_version": "3.0.4",
+  "path": "/mcp",
+  "auth": {
+    "type": "none"
+  },
+  "mcp": {
+    "server": {
+      "name": "catalogo",
+      "version": "0.1.0",
+      "title": "Catálogo"
+    },
+    "tools": [
+      {
+        "name": "buscar_temas",
+        "title": "Buscar temas",
+        "description": "Busca temas de decoração no catálogo público por nome ou descrição.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "type": "object",
+          "properties": {
+            "busca": {
+              "description": "Nome, palavra ou estilo procurado.",
+              "type": "string"
+            },
+            "precoMaximo": {
+              "description": "Preço inicial máximo em reais.",
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "limite": {
+              "default": 20,
+              "description": "Quantidade máxima de resultados.",
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 50
+            }
+          },
+          "additionalProperties": false
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "consultar_tema",
+        "title": "Consultar tema",
+        "description": "Mostra preço inicial, fotos e itens de um tema específico do catálogo público.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Identificador do tema, como JPM_1."
+            }
+          },
+          "required": [
+            "id"
+          ],
+          "additionalProperties": false
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "montar_orcamento",
+        "title": "Montar orçamento",
+        "description": "Monta um resumo público de orçamento para temas escolhidos, sem reservar uma data.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "type": "object",
+          "properties": {
+            "temaIds": {
+              "minItems": 1,
+              "maxItems": 20,
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Identificadores dos temas escolhidos."
+            },
+            "nomeCliente": {
+              "description": "Nome da pessoa interessada.",
+              "type": "string"
+            },
+            "dataEvento": {
+              "description": "Data do evento, preferencialmente no formato AAAA-MM-DD.",
+              "type": "string"
+            }
+          },
+          "required": [
+            "temaIds"
+          ],
+          "additionalProperties": false
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}

@@ -11,10 +11,12 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SimuladorRouteImport } from './routes/simulador'
+import { Route as McpRouteImport } from './routes/mcp'
 import { Route as GoogleChar123Char125RouteImport } from './routes/google{$}'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminRecorteIaRouteImport } from './routes/admin_.recorte-ia'
+import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -24,6 +26,11 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
 const SimuladorRoute = SimuladorRouteImport.update({
   id: '/simulador',
   path: '/simulador',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const McpRoute = McpRouteImport.update({
+  id: '/mcp',
+  path: '/mcp',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GoogleChar123Char125Route = GoogleChar123Char125RouteImport.update({
@@ -46,21 +53,31 @@ const AdminRecorteIaRoute = AdminRecorteIaRouteImport.update({
   path: '/admin/recorte-ia',
   getParentRoute: () => rootRouteImport,
 } as any)
+const Char91DotwellKnownChar93OauthProtectedResourceRoute =
+  Char91DotwellKnownChar93OauthProtectedResourceRouteImport.update({
+    id: '/.well-known/oauth-protected-resource',
+    path: '/.well-known/oauth-protected-resource',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/google{$}': typeof GoogleChar123Char125Route
+  '/mcp': typeof McpRoute
   '/simulador': typeof SimuladorRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/recorte-ia': typeof AdminRecorteIaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/google{$}': typeof GoogleChar123Char125Route
+  '/mcp': typeof McpRoute
   '/simulador': typeof SimuladorRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/recorte-ia': typeof AdminRecorteIaRoute
 }
 export interface FileRoutesById {
@@ -68,8 +85,10 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/google{$}': typeof GoogleChar123Char125Route
+  '/mcp': typeof McpRoute
   '/simulador': typeof SimuladorRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin_/recorte-ia': typeof AdminRecorteIaRoute
 }
 export interface FileRouteTypes {
@@ -78,24 +97,30 @@ export interface FileRouteTypes {
     | '/'
     | '/admin'
     | '/google{$}'
+    | '/mcp'
     | '/simulador'
     | '/sitemap.xml'
+    | '/.well-known/oauth-protected-resource'
     | '/admin/recorte-ia'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/admin'
     | '/google{$}'
+    | '/mcp'
     | '/simulador'
     | '/sitemap.xml'
+    | '/.well-known/oauth-protected-resource'
     | '/admin/recorte-ia'
   id:
     | '__root__'
     | '/'
     | '/admin'
     | '/google{$}'
+    | '/mcp'
     | '/simulador'
     | '/sitemap.xml'
+    | '/.well-known/oauth-protected-resource'
     | '/admin_/recorte-ia'
   fileRoutesById: FileRoutesById
 }
@@ -103,8 +128,10 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRoute
   GoogleChar123Char125Route: typeof GoogleChar123Char125Route
+  McpRoute: typeof McpRoute
   SimuladorRoute: typeof SimuladorRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   AdminRecorteIaRoute: typeof AdminRecorteIaRoute
 }
 
@@ -122,6 +149,13 @@ declare module '@tanstack/react-router' {
       path: '/simulador'
       fullPath: '/simulador'
       preLoaderRoute: typeof SimuladorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mcp': {
+      id: '/mcp'
+      path: '/mcp'
+      fullPath: '/mcp'
+      preLoaderRoute: typeof McpRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/google{$}': {
@@ -152,6 +186,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminRecorteIaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/.well-known/oauth-protected-resource': {
+      id: '/.well-known/oauth-protected-resource'
+      path: '/.well-known/oauth-protected-resource'
+      fullPath: '/.well-known/oauth-protected-resource'
+      preLoaderRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -159,8 +200,11 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRoute,
   GoogleChar123Char125Route: GoogleChar123Char125Route,
+  McpRoute: McpRoute,
   SimuladorRoute: SimuladorRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  Char91DotwellKnownChar93OauthProtectedResourceRoute:
+    Char91DotwellKnownChar93OauthProtectedResourceRoute,
   AdminRecorteIaRoute: AdminRecorteIaRoute,
 }
 export const routeTree = rootRouteImport
