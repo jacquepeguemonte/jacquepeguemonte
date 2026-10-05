@@ -768,14 +768,38 @@
     "id": "JPM_66",
     "title": "Chá de Lingerie",
     "description": "Kit de festa Pegue e Monte tema Chá de Lingerie. Inclui itens decorativos para sua festa em Goianésia - GO.",
-    "image": "https://lh3.googleusercontent.com/hdiVLo7M-xlyGjiyEKRxYGNK9tgLQyaFfY2Nx79Hn9WD_gKXhvXbtIwQcRQzW5q2uqsqSspJD9VC1Vd8yg=w1425",
-    "price": 170.0
+    "image": "/__l5e/assets-v1/556b82b8-a17d-4a76-8e66-bbb9849ac5cd/cha-lingerie.png",
+    "price": 170.0,
+    "photos": [
+      "https://lh3.googleusercontent.com/hdiVLo7M-xlyGjiyEKRxYGNK9tgLQyaFfY2Nx79Hn9WD_gKXhvXbtIwQcRQzW5q2uqsqSspJD9VC1Vd8yg=w1425"
+    ]
   },
   {
     "id": "JPM_67",
     "title": "Verde Esmeralda Nude Boho",
     "description": "Kit de festa Pegue e Monte tema Verde Esmeralda Nude Boho. Inclui itens decorativos para sua festa em Goianésia - GO.",
     "image": "/__l5e/assets-v1/45ba9de8-847d-4105-b162-6ca39c84c86c/verde-nude-boho.jpeg",
+    "price": 170.0
+  },
+  {
+    "id": "JPM_68",
+    "title": "Galinha Pintadinha",
+    "description": "Kit de festa Pegue e Monte tema Galinha Pintadinha. Inclui itens decorativos para sua festa em Goianésia - GO.",
+    "image": "/__l5e/assets-v1/3767bb4c-70eb-4ebc-8ae6-0bb893d7f2a2/galinha-pintadinha.png",
+    "price": 170.0
+  },
+  {
+    "id": "JPM_69",
+    "title": "Batizado Rosa e Dourado",
+    "description": "Kit de festa Pegue e Monte tema Batizado Rosa e Dourado. Inclui itens decorativos para sua festa em Goianésia - GO.",
+    "image": "/__l5e/assets-v1/683fb753-c2d9-4641-8060-0797de3a2f02/batizado-rosa-dourado.jpeg",
+    "price": 170.0
+  },
+  {
+    "id": "JPM_70",
+    "title": "Chá de Fraldas Rosa Ursinha",
+    "description": "Kit de festa Pegue e Monte tema Chá de Fraldas Rosa Ursinha. Inclui itens decorativos para sua festa em Goianésia - GO.",
+    "image": "/__l5e/assets-v1/8602ea16-c45e-4de8-aacb-8971f916be3c/cha-fraldas-rosa.png",
     "price": 170.0
   }
 ]
