@@ -18,11 +18,10 @@ export const LEGACY_PRICE_KEY = "jpm_price_overrides";
 
 export const DEFAULT_ITEMS: string[] = [
   "Painel temático",
-  "Mesa principal decorada",
-  "Topo de bolo e displays",
-  "Toalha de mesa",
+  "Painel Romano",
+  "Mesa principal ou Trio de Cilindros",
   "Bandejas, boleiras e suportes",
-  "Itens decorativos do tema",
+  "Tapete",
 ];
 
 type ProductData = Omit<Product, "items" | "photos"> & {

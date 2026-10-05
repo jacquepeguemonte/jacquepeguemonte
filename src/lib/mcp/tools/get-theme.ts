@@ -1,15 +1,7 @@
 import { defineTool, ToolError } from "@lovable.dev/mcp-js";
 import { z } from "zod";
 import products from "@/data/products.json";
-
-const DEFAULT_ITEMS = [
-  "Painel temático",
-  "Mesa principal decorada",
-  "Topo de bolo e displays",
-  "Toalha de mesa",
-  "Bandejas, boleiras e suportes",
-  "Itens decorativos do tema",
-];
+import { DEFAULT_ITEMS } from "@/lib/catalog";
 
 export default defineTool({
   name: "consultar_tema",
