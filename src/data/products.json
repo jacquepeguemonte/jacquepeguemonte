@@ -220,8 +220,11 @@
     "id": "JPM_33",
     "title": "Homem Aranha",
     "description": "Kit de festa Pegue e Monte tema Homem Aranha. Inclui itens decorativos para sua festa em Goianésia - GO.",
-    "image": "https://media.base44.com/images/public/69bfc60ede2f4cd45a84316c/9ed331ccd_Tema_HomemAranhaMiniFesta.png",
-    "price": 170
+    "image": "/__l5e/assets-v1/4f118b2d-cf43-4943-87fd-ff761285ab14/homem-aranha.jpeg",
+    "price": 170,
+    "photos": [
+      "https://media.base44.com/images/public/69bfc60ede2f4cd45a84316c/9ed331ccd_Tema_HomemAranhaMiniFesta.png"
+    ]
   },
   {
     "id": "JPM_34",
