@@ -13,10 +13,12 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as GoogleChar123Char125RouteImport } from './routes/google{$}'
 import { Route as McpRouteImport } from './routes/mcp'
+import { Route as RecomendarRouteImport } from './routes/recomendar'
 import { Route as SimuladorRouteImport } from './routes/simulador'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 import { Route as AdminRecorteIaRouteImport } from './routes/admin_.recorte-ia'
+import { Route as ApiRecomendarRouteImport } from './routes/api/recomendar'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -36,6 +38,11 @@ const GoogleChar123Char125Route = GoogleChar123Char125RouteImport.update({
 const McpRoute = McpRouteImport.update({
   id: '/mcp',
   path: '/mcp',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RecomendarRoute = RecomendarRouteImport.update({
+  id: '/recomendar',
+  path: '/recomendar',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SimuladorRoute = SimuladorRouteImport.update({
@@ -59,26 +66,35 @@ const AdminRecorteIaRoute = AdminRecorteIaRouteImport.update({
   path: '/admin/recorte-ia',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiRecomendarRoute = ApiRecomendarRouteImport.update({
+  id: '/api/recomendar',
+  path: '/api/recomendar',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/google{$}': typeof GoogleChar123Char125Route
   '/mcp': typeof McpRoute
+  '/recomendar': typeof RecomendarRoute
   '/simulador': typeof SimuladorRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/recorte-ia': typeof AdminRecorteIaRoute
+  '/api/recomendar': typeof ApiRecomendarRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/google{$}': typeof GoogleChar123Char125Route
   '/mcp': typeof McpRoute
+  '/recomendar': typeof RecomendarRoute
   '/simulador': typeof SimuladorRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/recorte-ia': typeof AdminRecorteIaRoute
+  '/api/recomendar': typeof ApiRecomendarRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -86,10 +102,12 @@ export interface FileRoutesById {
   '/admin': typeof AdminRoute
   '/google{$}': typeof GoogleChar123Char125Route
   '/mcp': typeof McpRoute
+  '/recomendar': typeof RecomendarRoute
   '/simulador': typeof SimuladorRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin_/recorte-ia': typeof AdminRecorteIaRoute
+  '/api/recomendar': typeof ApiRecomendarRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -98,30 +116,36 @@ export interface FileRouteTypes {
     | '/admin'
     | '/google{$}'
     | '/mcp'
+    | '/recomendar'
     | '/simulador'
     | '/sitemap.xml'
     | '/.well-known/oauth-protected-resource'
     | '/admin/recorte-ia'
+    | '/api/recomendar'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/admin'
     | '/google{$}'
     | '/mcp'
+    | '/recomendar'
     | '/simulador'
     | '/sitemap.xml'
     | '/.well-known/oauth-protected-resource'
     | '/admin/recorte-ia'
+    | '/api/recomendar'
   id:
     | '__root__'
     | '/'
     | '/admin'
     | '/google{$}'
     | '/mcp'
+    | '/recomendar'
     | '/simulador'
     | '/sitemap.xml'
     | '/.well-known/oauth-protected-resource'
     | '/admin_/recorte-ia'
+    | '/api/recomendar'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -129,10 +153,12 @@ export interface RootRouteChildren {
   AdminRoute: typeof AdminRoute
   GoogleChar123Char125Route: typeof GoogleChar123Char125Route
   McpRoute: typeof McpRoute
+  RecomendarRoute: typeof RecomendarRoute
   SimuladorRoute: typeof SimuladorRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   AdminRecorteIaRoute: typeof AdminRecorteIaRoute
+  ApiRecomendarRoute: typeof ApiRecomendarRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -165,6 +191,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof McpRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/recomendar': {
+      id: '/recomendar'
+      path: '/recomendar'
+      fullPath: '/recomendar'
+      preLoaderRoute: typeof RecomendarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/simulador': {
       id: '/simulador'
       path: '/simulador'
@@ -193,6 +226,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminRecorteIaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/recomendar': {
+      id: '/api/recomendar'
+      path: '/api/recomendar'
+      fullPath: '/api/recomendar'
+      preLoaderRoute: typeof ApiRecomendarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -201,11 +241,13 @@ const rootRouteChildren: RootRouteChildren = {
   AdminRoute: AdminRoute,
   GoogleChar123Char125Route: GoogleChar123Char125Route,
   McpRoute: McpRoute,
+  RecomendarRoute: RecomendarRoute,
   SimuladorRoute: SimuladorRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   Char91DotwellKnownChar93OauthProtectedResourceRoute:
     Char91DotwellKnownChar93OauthProtectedResourceRoute,
   AdminRecorteIaRoute: AdminRecorteIaRoute,
+  ApiRecomendarRoute: ApiRecomendarRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
