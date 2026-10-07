@@ -289,6 +289,12 @@ function Index() {
                   Ver catálogo
                 </a>
                 <Link
+                  to="/recomendar"
+                  className="rounded-full bg-accent px-5 py-3 text-sm font-semibold text-accent-foreground shadow hover:opacity-90"
+                >
+                  ✨ Recomendar tema com IA
+                </Link>
+                <Link
                   to="/simulador"
                   className="rounded-full bg-secondary px-5 py-3 text-sm font-semibold text-secondary-foreground shadow hover:opacity-90"
                 >
