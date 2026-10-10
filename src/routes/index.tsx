@@ -1,5 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
+import { Sparkles, Palette, ArrowUpRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { InfiniteCarousel } from "@/components/infinite-carousel";
+import { CatalogKitCard } from "@/components/catalog-kit-card";
+import { CatalogEmptyState } from "@/components/catalog-empty-state";
+import { CustomerTestimonials } from "@/components/customer-testimonials";
 import logoAsset from "@/assets/logo_jpm.jpeg.asset.json";
 import heroVideoAsset from "@/assets/hero-video.mp4.asset.json";
 import {
@@ -23,6 +29,8 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "Jacque Pegue & Monte | Catálogo" },
       { property: "og:description", content: "Catálogo virtual de kits de festa Pegue e Monte em Goianésia - GO." },
       { property: "og:url", content: "https://jacquepeguemonte.lovable.app/" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: "https://jacquepeguemonte.lovable.app/" }],
     scripts: [
@@ -75,6 +83,7 @@ function Index() {
   const [sort, setSort] = useState<"recentes" | "menor" | "maior" | "az">("recentes");
   const [selected, setSelected] = useState<Record<string, number>>({});
   const [catalog, setCatalog] = useState<Product[]>([]);
+  const [catalogReady, setCatalogReady] = useState(false);
   const [details, setDetails] = useState<Product | null>(null);
   const [detailPhoto, setDetailPhoto] = useState("");
   const [availability, setAvailability] = useState<Product | null>(null);
@@ -88,7 +97,10 @@ function Index() {
   const [receiptKind, setReceiptKind] = useState<"pagamento" | "recebimento">("pagamento");
 
   useEffect(() => {
-    const reload = () => setCatalog(mergeCatalog(loadOverrides(), loadCustom()));
+    const reload = () => {
+      setCatalog(mergeCatalog(loadOverrides(), loadCustom()));
+      setCatalogReady(true);
+    };
     reload();
     const onStorage = (e: StorageEvent) => {
       if (!e.key || e.key.startsWith("jpm_")) reload();
@@ -281,31 +293,30 @@ function Index() {
                 nossa entrega segura.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
-                <a
-                  href="#catalogo"
-                  className="rounded-full px-5 py-3 text-sm font-semibold text-primary-foreground"
-                  style={{ background: "var(--gradient-festive)", boxShadow: "var(--shadow-festive)" }}
-                >
-                  Ver catálogo
-                </a>
-                <Link
-                  to="/recomendar"
-                  className="rounded-full bg-accent px-5 py-3 text-sm font-semibold text-accent-foreground shadow hover:opacity-90"
-                >
-                  ✨ Recomendar tema com IA
-                </Link>
-                <Link
-                  to="/simulador"
-                  className="rounded-full bg-secondary px-5 py-3 text-sm font-semibold text-secondary-foreground shadow hover:opacity-90"
-                >
-                  🎨 Simulador Pegue e Monte
-                </Link>
-                <a
-                  href="#simulador"
-                  className="rounded-full border border-primary/30 bg-card px-5 py-3 text-sm font-semibold text-primary hover:bg-primary/5"
-                >
-                  Simular orçamento
-                </a>
+                <Button asChild size="lg"><a href="#catalogo">Ver catálogo <ArrowUpRight /></a></Button>
+                <Button asChild variant="outline" size="lg"><a href="#simulador">Simular orçamento</a></Button>
+              </div>
+              <div className="mt-5 grid min-w-0 gap-3 sm:grid-cols-2">
+                <Button asChild variant="outline" className="h-auto min-h-24 w-full justify-start whitespace-normal border-primary/25 bg-card/90 p-4 text-left shadow-sm hover:border-primary hover:bg-primary/5">
+                  <Link to="/recomendar">
+                    <Sparkles className="shrink-0 text-primary" />
+                    <span className="min-w-0 flex-1">
+                      <span className="mb-1 block w-fit rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-bold uppercase text-primary">Inteligência artificial</span>
+                      <span className="block text-sm font-semibold text-foreground">Recomendar tema com IA</span>
+                    </span>
+                    <ArrowUpRight className="text-primary" />
+                  </Link>
+                </Button>
+                <Button asChild variant="outline" className="h-auto min-h-24 w-full justify-start whitespace-normal border-accent/50 bg-card/90 p-4 text-left shadow-sm hover:border-accent hover:bg-accent/10">
+                  <Link to="/simulador">
+                    <Palette className="shrink-0 text-primary" />
+                    <span className="min-w-0 flex-1">
+                      <span className="mb-1 block w-fit rounded-full bg-gold/20 px-2 py-0.5 text-[10px] font-bold uppercase text-gold-foreground">Sua festa, seu estilo</span>
+                      <span className="block text-sm font-semibold text-foreground">Simulador Pegue e Monte</span>
+                    </span>
+                    <ArrowUpRight className="text-primary" />
+                  </Link>
+                </Button>
               </div>
               <dl className="mt-8 grid max-w-md grid-cols-3 gap-3 text-center">
                 {[
@@ -344,6 +355,7 @@ function Index() {
               Escolha o estilo da sua festa e veja os kits disponíveis.
             </p>
           </div>
+          {catalogReady && Object.values(counts).every((count) => count === 0) ? <CatalogEmptyState /> : (
           <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
             {CATEGORIES.map((c) => {
               const active = category === c.id;
@@ -368,6 +380,7 @@ function Index() {
               );
             })}
           </ul>
+          )}
         </section>
 
         {/* CATÁLOGO + FILTROS */}
@@ -456,86 +469,15 @@ function Index() {
               </div>
             </div>
 
-            <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-              {filtered.map((p) => {
-                const photoCount = getProductPhotos(p).length;
-                return (
-                  <li
-                    key={p.id}
-                    className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
-                  >
-                    <div className="relative aspect-square overflow-hidden bg-muted">
-                      <img
-                        src={p.image}
-                        alt={p.title}
-                        loading="lazy"
-                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
-                      <span className="absolute left-2 top-2 rounded-full bg-gold px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-gold-foreground">
-                        Pegue e Monte
-                      </span>
-                      {photoCount > 1 && (
-                        <span className="absolute bottom-2 right-2 rounded-full bg-card/90 px-2 py-0.5 text-[10px] font-bold text-primary shadow-sm">
-                          {photoCount} fotos
-                        </span>
-                      )}
-                    </div>
-                    <div className="flex flex-1 flex-col gap-2 p-4">
-                      <h3 className="line-clamp-2 text-sm font-semibold text-foreground">{p.title}</h3>
-                      <p className="text-base font-bold text-primary">
-                        <span className="text-xs font-medium text-muted-foreground">a partir de </span>
-                        {brl(p.price)}
-                      </p>
-                      <p className="text-[11px] text-muted-foreground">
-                        📍 {CITY} · Balões não incluso
-                      </p>
-                      <div className="mt-auto space-y-2 pt-2">
-                        <div className="flex items-center justify-between gap-2">
-                          <div className="flex items-center rounded-md border border-border">
-                            <button
-                              type="button"
-                              onClick={() => setQty(p.id, -1)}
-                              className="px-2 py-1 text-sm text-foreground hover:bg-muted"
-                              aria-label={`Remover ${p.title}`}
-                            >
-                              −
-                            </button>
-                            <span className="min-w-6 text-center text-sm">{selected[p.id] ?? 0}</span>
-                            <button
-                              type="button"
-                              onClick={() => setQty(p.id, 1)}
-                              className="px-2 py-1 text-sm text-foreground hover:bg-muted"
-                              aria-label={`Adicionar ${p.title}`}
-                            >
-                              +
-                            </button>
-                          </div>
-                          <button
-                            type="button"
-                            onClick={() => openDetails(p)}
-                            className="rounded-md border border-primary/40 px-3 py-1.5 text-xs font-semibold text-primary hover:bg-primary/5"
-                          >
-                            Ver detalhes
-                          </button>
-                        </div>
-                        <button
-                          type="button"
-                          onClick={() => openAvailability(p)}
-                          className="w-full rounded-md bg-primary px-3 py-2 text-xs font-semibold text-primary-foreground hover:opacity-90"
-                        >
-                          Verificar disponibilidade
-                        </button>
-                      </div>
-                    </div>
-                  </li>
-                );
-              })}
-            </ul>
-
-            {filtered.length === 0 && (
-              <p className="py-16 text-center text-sm text-muted-foreground">
-                Nenhum tema encontrado com esses filtros.
-              </p>
+            {!catalogReady ? (
+              <div role="status" className="py-16 text-center text-muted-foreground">Carregando temas…</div>
+            ) : filtered.length > 0 ? (
+              <InfiniteCarousel label="Kits de decoração" key={`${category}-${query}-${maxPrice}-${sort}`}>
+                {filtered.map((p) => <CatalogKitCard key={p.id} product={p} quantity={selected[p.id] ?? 0}
+                  onQuantity={(delta) => setQty(p.id, delta)} onDetails={() => openDetails(p)} onAvailability={() => openAvailability(p)} />)}
+              </InfiniteCarousel>
+            ) : (
+              <CatalogEmptyState filtered={catalog.length > 0} />
             )}
           </div>
         </section>
@@ -775,6 +717,7 @@ function Index() {
             </div>
           </div>
         </section>
+        <CustomerTestimonials />
       </main>
 
       {/* RODAPÉ */}

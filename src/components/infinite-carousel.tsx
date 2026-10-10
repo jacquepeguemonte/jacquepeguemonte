@@ -75,7 +75,7 @@ export function InfiniteCarousel({ children, label, kind = "kits" }: {
           ))}
         </div>
       </div>
-      <Button variant="outline" size="icon" title="Précédent" aria-label={`Anterior — ${label}`} disabled={!api?.canScrollPrev()}
+      <Button variant="outline" size="icon" title="Anterior" aria-label={`Anterior — ${label}`} disabled={!api?.canScrollPrev()}
         onClick={() => navigate(index - 1)} className="absolute -left-2 top-[38%] z-10 h-10 w-10 rounded-full border-primary/20 bg-card shadow-md sm:-left-4"><ArrowLeft /></Button>
       <Button variant="outline" size="icon" title="Próximo" aria-label={`Próximo — ${label}`} disabled={!api?.canScrollNext()}
         onClick={() => navigate(index + 1)} className="absolute -right-2 top-[38%] z-10 h-10 w-10 rounded-full border-primary/20 bg-card shadow-md sm:-right-4"><ArrowRight /></Button>
