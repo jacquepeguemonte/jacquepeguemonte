@@ -11,7 +11,7 @@ export function InfiniteCarousel({ children, label, kind = "kits" }: {
   kind?: "kits" | "reviews";
 }) {
   const slides = Children.toArray(children);
-  const autoScroll = useMemo(() => AutoScroll({ speed: 0.65, startDelay: 1800, playOnInit: false, stopOnInteraction: true, stopOnFocusIn: false }), []);
+  const autoScroll = useMemo(() => AutoScroll({ speed: 0.65, startDelay: 1800, playOnInit: false, stopOnInteraction: true, stopOnFocusIn: true, stopOnMouseEnter: true }), []);
   const [viewport, api] = useEmblaCarousel({ loop: true, align: "start", dragFree: true }, [autoScroll]);
   const [index, setIndex] = useState(0);
   const [snaps, setSnaps] = useState<number[]>([]);
@@ -40,11 +40,16 @@ export function InfiniteCarousel({ children, label, kind = "kits" }: {
   useEffect(() => {
     if (!api) return;
     const update = () => { setIndex(api.selectedScrollSnap()); setSnaps(api.scrollSnapList()); };
+    const reinitialize = () => {
+      update();
+      if (paused || reduced || hovered.current || region.current?.contains(document.activeElement)) autoScroll.stop();
+      else resume();
+    };
     update();
-    api.on("select", update).on("reInit", update);
+    api.on("select", update).on("reInit", reinitialize);
     if (paused || reduced) autoScroll.stop();
     else resume();
-    return () => { api.off("select", update).off("reInit", update); clearTimeout(timer.current); autoScroll.stop(); };
+    return () => { api.off("select", update).off("reInit", reinitialize); clearTimeout(timer.current); autoScroll.stop(); };
   }, [api, autoScroll, paused, reduced, resume]);
 
   const navigate = (target: number) => { autoScroll.stop(); api?.scrollTo(target); resume(); };
