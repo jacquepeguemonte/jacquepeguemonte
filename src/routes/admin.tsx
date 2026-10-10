@@ -40,6 +40,10 @@ export const Route = createFileRoute("/admin")({
       { title: "Administração | Jacque Pegue & Monte" },
       { name: "description", content: "Painel de administração interno do catálogo Jacque Pegue & Monte para gestão de kits, preços e temas." },
       { name: "robots", content: "noindex,nofollow" },
+      { property: "og:title", content: "Administração | Jacque Pegue & Monte" },
+      { property: "og:description", content: "Gestão interna dos kits e temas de decoração Jacque Pegue & Monte." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
     links: [
       { rel: "canonical", href: "https://jacquepeguemonte.lovable.app/admin" },

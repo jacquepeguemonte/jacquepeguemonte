@@ -11,7 +11,7 @@ export function InfiniteCarousel({ children, label, kind = "kits" }: {
   kind?: "kits" | "reviews";
 }) {
   const slides = Children.toArray(children);
-  const autoScroll = useMemo(() => AutoScroll({ speed: 0.65, startDelay: 1800, playOnInit: false, stopOnInteraction: false, stopOnFocusIn: false }), []);
+  const autoScroll = useMemo(() => AutoScroll({ speed: 0.65, startDelay: 1800, playOnInit: false, stopOnInteraction: true, stopOnFocusIn: false }), []);
   const [viewport, api] = useEmblaCarousel({ loop: true, align: "start", dragFree: true }, [autoScroll]);
   const [index, setIndex] = useState(0);
   const [snaps, setSnaps] = useState<number[]>([]);
