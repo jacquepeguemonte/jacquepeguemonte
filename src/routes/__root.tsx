@@ -90,8 +90,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:card", content: "summary" },
       { name: "twitter:title", content: "Jacque Pegue & Monte | Decoração de Festa em Goianésia" },
       { name: "twitter:description", content: "Monte a festa dos seus sonhos de forma prática e econômica. Kits Pegue e Monte em Goianésia - GO." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/c051ecfb-e99a-4efe-b3dc-ddf6b53591ff/id-preview-c555c511--2fa49fb7-d3cd-4eaf-a3a5-fecb5f03e3f8.lovable.app-1782306900304.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/c051ecfb-e99a-4efe-b3dc-ddf6b53591ff/id-preview-c555c511--2fa49fb7-d3cd-4eaf-a3a5-fecb5f03e3f8.lovable.app-1782306900304.png" },
     ],
     links: [
       {
