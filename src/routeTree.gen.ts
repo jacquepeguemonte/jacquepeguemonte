@@ -19,6 +19,7 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 import { Route as AdminRecorteIaRouteImport } from './routes/admin_.recorte-ia'
 import { Route as ApiRecomendarRouteImport } from './routes/api/recomendar'
+import { Route as ApiPublicSimImgSplatRouteImport } from './routes/api/public/sim-img.$'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -71,6 +72,11 @@ const ApiRecomendarRoute = ApiRecomendarRouteImport.update({
   path: '/api/recomendar',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicSimImgSplatRoute = ApiPublicSimImgSplatRouteImport.update({
+  id: '/api/public/sim-img/$',
+  path: '/api/public/sim-img/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -83,6 +89,7 @@ export interface FileRoutesByFullPath {
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/recorte-ia': typeof AdminRecorteIaRoute
   '/api/recomendar': typeof ApiRecomendarRoute
+  '/api/public/sim-img/$': typeof ApiPublicSimImgSplatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -95,6 +102,7 @@ export interface FileRoutesByTo {
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/recorte-ia': typeof AdminRecorteIaRoute
   '/api/recomendar': typeof ApiRecomendarRoute
+  '/api/public/sim-img/$': typeof ApiPublicSimImgSplatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -108,6 +116,7 @@ export interface FileRoutesById {
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin_/recorte-ia': typeof AdminRecorteIaRoute
   '/api/recomendar': typeof ApiRecomendarRoute
+  '/api/public/sim-img/$': typeof ApiPublicSimImgSplatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -122,6 +131,7 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/admin/recorte-ia'
     | '/api/recomendar'
+    | '/api/public/sim-img/$'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -134,6 +144,7 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/admin/recorte-ia'
     | '/api/recomendar'
+    | '/api/public/sim-img/$'
   id:
     | '__root__'
     | '/'
@@ -146,6 +157,7 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/admin_/recorte-ia'
     | '/api/recomendar'
+    | '/api/public/sim-img/$'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -159,6 +171,7 @@ export interface RootRouteChildren {
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   AdminRecorteIaRoute: typeof AdminRecorteIaRoute
   ApiRecomendarRoute: typeof ApiRecomendarRoute
+  ApiPublicSimImgSplatRoute: typeof ApiPublicSimImgSplatRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -233,6 +246,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiRecomendarRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/sim-img/$': {
+      id: '/api/public/sim-img/$'
+      path: '/api/public/sim-img/$'
+      fullPath: '/api/public/sim-img/$'
+      preLoaderRoute: typeof ApiPublicSimImgSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -248,6 +268,7 @@ const rootRouteChildren: RootRouteChildren = {
     Char91DotwellKnownChar93OauthProtectedResourceRoute,
   AdminRecorteIaRoute: AdminRecorteIaRoute,
   ApiRecomendarRoute: ApiRecomendarRoute,
+  ApiPublicSimImgSplatRoute: ApiPublicSimImgSplatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
