@@ -1,16 +1,13 @@
+// Simulator data (themes + pieces), stored in Lovable Cloud.
+// File name kept so existing imports keep working.
+import { supabase } from "@/integrations/supabase/client";
 import {
-  addDoc,
-  collection,
-  deleteDoc,
-  doc,
-  getDocs,
-  onSnapshot,
-  orderBy,
-  query,
-  updateDoc,
-} from "firebase/firestore";
-import { getDownloadURL, ref, uploadBytes, deleteObject } from "firebase/storage";
-import { db, storage } from "./firebase";
+  simCreate,
+  simDelete,
+  simRemoveFile,
+  simUpdate,
+  simUpload,
+} from "./simulador.functions";
 
 export type Tema = {
   id: string;
@@ -29,66 +26,76 @@ export type Peca = {
   storage_path?: string;
 };
 
-const TEMAS = "temas";
-const PECAS = "pecas";
+const PASSWORD = "3282";
 
 export async function listTemas(): Promise<Tema[]> {
-  const snap = await getDocs(query(collection(db, TEMAS), orderBy("nome")));
-  return snap.docs.map((d) => ({ id: d.id, ...(d.data() as Omit<Tema, "id">) }));
+  const { data } = await supabase.from("sim_temas").select("id,nome,foto_inspiracao").order("nome");
+  return (data ?? []) as Tema[];
 }
 
-export function subscribeTemas(cb: (temas: Tema[]) => void) {
-  return onSnapshot(query(collection(db, TEMAS), orderBy("nome")), (snap) => {
-    cb(snap.docs.map((d) => ({ id: d.id, ...(d.data() as Omit<Tema, "id">) })));
+async function listPecas(): Promise<Peca[]> {
+  const { data } = await supabase
+    .from("sim_pecas")
+    .select("id,nome,categoria,foto_png,camada_z,storage_path")
+    .order("camada_z");
+  return (data ?? []).map((p) => ({ ...p, storage_path: p.storage_path ?? undefined })) as Peca[];
+}
+
+function subscribe<T>(table: "sim_temas" | "sim_pecas", load: () => Promise<T>, cb: (v: T) => void) {
+  let alive = true;
+  const refresh = () => load().then((v) => alive && cb(v));
+  refresh();
+  const ch = supabase
+    .channel(`${table}-${Math.random().toString(36).slice(2)}`)
+    .on("postgres_changes", { event: "*", schema: "public", table }, refresh)
+    .subscribe();
+  return () => {
+    alive = false;
+    supabase.removeChannel(ch);
+  };
+}
+
+export const subscribeTemas = (cb: (t: Tema[]) => void) => subscribe("sim_temas", listTemas, cb);
+export const subscribePecas = (cb: (p: Peca[]) => void) => subscribe("sim_pecas", listPecas, cb);
+
+function toBase64(file: File): Promise<string> {
+  return new Promise((res, rej) => {
+    const r = new FileReader();
+    r.onload = () => res(String(r.result).split(",")[1] ?? "");
+    r.onerror = rej;
+    r.readAsDataURL(file);
   });
 }
 
-export function subscribePecas(cb: (pecas: Peca[]) => void) {
-  return onSnapshot(query(collection(db, PECAS), orderBy("camada_z")), (snap) => {
-    cb(snap.docs.map((d) => ({ id: d.id, ...(d.data() as Omit<Peca, "id">) })));
+export async function uploadImage(folder: "temas" | "pecas", file: File) {
+  const ext = (file.name.split(".").pop() ?? "png").toLowerCase().replace(/[^a-z0-9]/g, "").slice(0, 5) || "png";
+  return simUpload({
+    data: { password: PASSWORD, folder, ext, contentType: file.type, base64: await toBase64(file) },
   });
-}
-
-export async function uploadImage(
-  folder: "temas" | "pecas",
-  file: File,
-): Promise<{ url: string; path: string }> {
-  const ext = file.name.split(".").pop() ?? "png";
-  const path = `${folder}/${Date.now()}_${Math.random().toString(36).slice(2, 8)}.${ext}`;
-  const r = ref(storage, path);
-  await uploadBytes(r, file, { contentType: file.type || undefined });
-  const url = await getDownloadURL(r);
-  return { url, path };
 }
 
 export async function removeStorage(path?: string) {
   if (!path) return;
   try {
-    await deleteObject(ref(storage, path));
+    await simRemoveFile({ data: { password: PASSWORD, path } });
   } catch {
     /* ignore */
   }
 }
 
-export async function createTema(t: Omit<Tema, "id">) {
-  return addDoc(collection(db, TEMAS), t);
-}
-export async function updateTema(id: string, patch: Partial<Omit<Tema, "id">>) {
-  return updateDoc(doc(db, TEMAS, id), patch);
-}
-export async function deleteTema(id: string) {
-  return deleteDoc(doc(db, TEMAS, id));
-}
+export const createTema = (t: Omit<Tema, "id">) =>
+  simCreate({ data: { password: PASSWORD, table: "sim_temas", row: t } });
+export const updateTema = (id: string, patch: Partial<Omit<Tema, "id">>) =>
+  simUpdate({ data: { password: PASSWORD, table: "sim_temas", id, patch } });
+export const deleteTema = (id: string) =>
+  simDelete({ data: { password: PASSWORD, table: "sim_temas", id } });
 
-export async function createPeca(p: Omit<Peca, "id">) {
-  return addDoc(collection(db, PECAS), p);
-}
-export async function updatePeca(id: string, patch: Partial<Omit<Peca, "id">>) {
-  return updateDoc(doc(db, PECAS, id), patch);
-}
-export async function deletePeca(id: string) {
-  return deleteDoc(doc(db, PECAS, id));
-}
+export const createPeca = (p: Omit<Peca, "id">) =>
+  simCreate({ data: { password: PASSWORD, table: "sim_pecas", row: p } });
+export const updatePeca = (id: string, patch: Partial<Omit<Peca, "id">>) =>
+  simUpdate({ data: { password: PASSWORD, table: "sim_pecas", id, patch } });
+export const deletePeca = (id: string) =>
+  simDelete({ data: { password: PASSWORD, table: "sim_pecas", id } });
 
 export const CAMADA_LABELS: Record<number, string> = {
   1: "1 · Base (tapetes)",
