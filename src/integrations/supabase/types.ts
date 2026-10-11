@@ -14,7 +14,57 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      sim_pecas: {
+        Row: {
+          camada_z: number
+          categoria: string
+          created_at: string
+          foto_png: string
+          id: string
+          nome: string
+          storage_path: string | null
+        }
+        Insert: {
+          camada_z?: number
+          categoria?: string
+          created_at?: string
+          foto_png?: string
+          id?: string
+          nome: string
+          storage_path?: string | null
+        }
+        Update: {
+          camada_z?: number
+          categoria?: string
+          created_at?: string
+          foto_png?: string
+          id?: string
+          nome?: string
+          storage_path?: string | null
+        }
+        Relationships: []
+      }
+      sim_temas: {
+        Row: {
+          created_at: string
+          foto_inspiracao: string
+          id: string
+          nome: string
+        }
+        Insert: {
+          created_at?: string
+          foto_inspiracao?: string
+          id?: string
+          nome: string
+        }
+        Update: {
+          created_at?: string
+          foto_inspiracao?: string
+          id?: string
+          nome?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
