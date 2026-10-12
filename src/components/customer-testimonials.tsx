@@ -18,6 +18,7 @@ const REVIEWS = [
   { name: "Reinaldo Freitas", text: "Recomendo preço justo" },
   { name: "Rayara Monteiro", text: "Simplesmente perfeito 👑 ❤️" },
   { name: "Talita Santos", text: "Nota mil ❤️ vou contratar mais vezes, super atenciosa, o pegue monte super fácil e prático ameii ❤️" },
+  { name: "Professora Ludmila Espindola", text: "Ficou mais lindo que pensei, amei muito. Obrigada pelo carinho!" },
 ];
 
 const GOOGLE_URL = "https://share.google/avc5Vr49EypK8L14i";
@@ -31,7 +32,7 @@ export function CustomerTestimonials() {
           <h2 id="depoimentos-titulo" className="mt-2 text-3xl font-bold text-foreground">Avaliações de Clientes</h2>
           <p className="mt-2 flex items-center gap-2 text-sm text-muted-foreground">
             <span className="flex gap-0.5 text-gold">{Array.from({ length: 5 }, (_, i) => <Star key={i} className="h-4 w-4 fill-current" />)}</span>
-            <strong className="text-foreground">5.0</strong> · 15 avaliações no Google
+            <strong className="text-foreground">5.0</strong> · 16 avaliações no Google
           </p>
         </div>
         <a href={GOOGLE_URL} target="_blank" rel="noopener noreferrer" className="rounded-full border border-primary px-5 py-2 text-sm font-semibold text-primary hover:bg-primary hover:text-primary-foreground">Ver no Google</a>
