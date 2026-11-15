@@ -772,9 +772,10 @@
     "id": "JPM_66",
     "title": "Chá de Lingerie",
     "description": "Kit de festa Pegue e Monte tema Chá de Lingerie. Inclui itens decorativos para sua festa em Goianésia - GO.",
-    "image": "/__l5e/assets-v1/556b82b8-a17d-4a76-8e66-bbb9849ac5cd/cha-lingerie.png",
-    "price": 170.0,
+    "image": "/__l5e/assets-v1/4a4cff1c-ce23-4a23-addc-306ae5bb7a18/cha-lingerie-rosa.jpeg",
+    "price": 170,
     "photos": [
+      "/__l5e/assets-v1/556b82b8-a17d-4a76-8e66-bbb9849ac5cd/cha-lingerie.png",
       "https://lh3.googleusercontent.com/hdiVLo7M-xlyGjiyEKRxYGNK9tgLQyaFfY2Nx79Hn9WD_gKXhvXbtIwQcRQzW5q2uqsqSspJD9VC1Vd8yg=w1425",
       "/__l5e/assets-v1/d708f809-9a67-475e-90a8-7769b2520f9f/cha-lingerie-2.jpeg"
     ]
@@ -825,14 +826,20 @@
     "id": "JPM_73",
     "title": "Confraternização",
     "description": "Kit de festa Pegue e Monte tema Confraternização. Inclui itens decorativos para sua festa em Goianésia - GO.",
-    "image": "/__l5e/assets-v1/ec6bcc5c-3a28-45a9-b377-ebc3213bab2c/confraternizacao.jpeg",
-    "price": 152
+    "image": "/__l5e/assets-v1/4138f614-9620-416b-b128-778006019405/confraternizacao-verde.jpeg",
+    "price": 170,
+    "photos": [
+      "/__l5e/assets-v1/ec6bcc5c-3a28-45a9-b377-ebc3213bab2c/confraternizacao.jpeg"
+    ]
   },
   {
     "id": "JPM_74",
     "title": "Festa de 18 Anos Rosa e Dourada",
     "description": "Kit de festa Pegue e Monte tema Festa de 18 Anos Rosa e Dourada. Inclui itens decorativos para sua festa em Goianésia - GO.",
-    "image": "/__l5e/assets-v1/8f177459-ef53-4f37-ba4e-68dfc0105536/festa-18-anos-rosa-dourada.png",
-    "price": 152
+    "image": "/__l5e/assets-v1/7803a24f-131a-4e6d-b570-ae55c1eff1ae/festa-18-anos-rosa-dourada-atual.png",
+    "price": 170,
+    "photos": [
+      "/__l5e/assets-v1/8f177459-ef53-4f37-ba4e-68dfc0105536/festa-18-anos-rosa-dourada.png"
+    ]
   }
 ]
