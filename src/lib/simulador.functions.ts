@@ -1,11 +1,9 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 
-// Same admin password the panel already uses; checked on the server before any change.
-const ADMIN_PASSWORD = "3282";
-const pw = z.string().refine((v) => v === ADMIN_PASSWORD, "Senha inválida");
-
 async function admin() {
+  const { requireAdminSession } = await import("./admin-session.server");
+  await requireAdminSession();
   const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
   return supabaseAdmin;
 }
@@ -23,8 +21,8 @@ export const simCreate = createServerFn({ method: "POST" })
   .inputValidator((d) =>
     z
       .discriminatedUnion("table", [
-        z.object({ password: pw, table: z.literal("sim_temas"), row: temaPatch }),
-        z.object({ password: pw, table: z.literal("sim_pecas"), row: pecaPatch }),
+        z.object({ table: z.literal("sim_temas"), row: temaPatch }),
+        z.object({ table: z.literal("sim_pecas"), row: pecaPatch }),
       ])
       .parse(d),
   )
@@ -39,8 +37,8 @@ export const simUpdate = createServerFn({ method: "POST" })
   .inputValidator((d) =>
     z
       .discriminatedUnion("table", [
-        z.object({ password: pw, table: z.literal("sim_temas"), id: z.string().uuid(), patch: temaPatch.partial() }),
-        z.object({ password: pw, table: z.literal("sim_pecas"), id: z.string().uuid(), patch: pecaPatch.partial() }),
+        z.object({ table: z.literal("sim_temas"), id: z.string().uuid(), patch: temaPatch.partial() }),
+        z.object({ table: z.literal("sim_pecas"), id: z.string().uuid(), patch: pecaPatch.partial() }),
       ])
       .parse(d),
   )
@@ -54,7 +52,7 @@ export const simUpdate = createServerFn({ method: "POST" })
 export const simDelete = createServerFn({ method: "POST" })
   .inputValidator((d) =>
     z
-      .object({ password: pw, table: z.enum(["sim_temas", "sim_pecas"]), id: z.string().uuid() })
+      .object({ table: z.enum(["sim_temas", "sim_pecas"]), id: z.string().uuid() })
       .parse(d),
   )
   .handler(async ({ data }) => {
@@ -68,7 +66,6 @@ export const simUpload = createServerFn({ method: "POST" })
   .inputValidator((d) =>
     z
       .object({
-        password: pw,
         folder: z.enum(["temas", "pecas"]),
         ext: z.string().regex(/^[a-z0-9]{1,5}$/i),
         contentType: z.string().max(100),
@@ -88,7 +85,7 @@ export const simUpload = createServerFn({ method: "POST" })
   });
 
 export const simRemoveFile = createServerFn({ method: "POST" })
-  .inputValidator((d) => z.object({ password: pw, path: z.string().max(500) }).parse(d))
+  .inputValidator((d) => z.object({ path: z.string().max(500) }).parse(d))
   .handler(async ({ data }) => {
     const db = await admin();
     await db.storage.from("simulador").remove([data.path]);

@@ -26,8 +26,6 @@ export type Peca = {
   storage_path?: string;
 };
 
-const PASSWORD = "3282";
-
 export async function listTemas(): Promise<Tema[]> {
   const { data } = await supabase.from("sim_temas").select("id,nome,foto_inspiracao").order("nome");
   return (data ?? []) as Tema[];
@@ -70,32 +68,32 @@ function toBase64(file: File): Promise<string> {
 export async function uploadImage(folder: "temas" | "pecas", file: File) {
   const ext = (file.name.split(".").pop() ?? "png").toLowerCase().replace(/[^a-z0-9]/g, "").slice(0, 5) || "png";
   return simUpload({
-    data: { password: PASSWORD, folder, ext, contentType: file.type, base64: await toBase64(file) },
+    data: { folder, ext, contentType: file.type, base64: await toBase64(file) },
   });
 }
 
 export async function removeStorage(path?: string) {
   if (!path) return;
   try {
-    await simRemoveFile({ data: { password: PASSWORD, path } });
+    await simRemoveFile({ data: { path } });
   } catch {
     /* ignore */
   }
 }
 
 export const createTema = (t: Omit<Tema, "id">) =>
-  simCreate({ data: { password: PASSWORD, table: "sim_temas", row: t } });
+  simCreate({ data: { table: "sim_temas", row: t } });
 export const updateTema = (id: string, patch: Partial<Omit<Tema, "id">>) =>
-  simUpdate({ data: { password: PASSWORD, table: "sim_temas", id, patch } });
+  simUpdate({ data: { table: "sim_temas", id, patch } });
 export const deleteTema = (id: string) =>
-  simDelete({ data: { password: PASSWORD, table: "sim_temas", id } });
+  simDelete({ data: { table: "sim_temas", id } });
 
 export const createPeca = (p: Omit<Peca, "id">) =>
-  simCreate({ data: { password: PASSWORD, table: "sim_pecas", row: p } });
+  simCreate({ data: { table: "sim_pecas", row: p } });
 export const updatePeca = (id: string, patch: Partial<Omit<Peca, "id">>) =>
-  simUpdate({ data: { password: PASSWORD, table: "sim_pecas", id, patch } });
+  simUpdate({ data: { table: "sim_pecas", id, patch } });
 export const deletePeca = (id: string) =>
-  simDelete({ data: { password: PASSWORD, table: "sim_pecas", id } });
+  simDelete({ data: { table: "sim_pecas", id } });
 
 export const CAMADA_LABELS: Record<number, string> = {
   1: "1 · Base (tapetes)",

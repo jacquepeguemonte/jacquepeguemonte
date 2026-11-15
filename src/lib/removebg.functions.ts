@@ -11,6 +11,8 @@ export const recortarPecaComIA = createServerFn({ method: "POST" })
     return data;
   })
   .handler(async ({ data }) => {
+    const { requireAdminSession } = await import("./admin-session.server");
+    await requireAdminSession();
     const apiKey = process.env["REMOVE_BG_API_KEY"];
     if (!apiKey) throw new Error("REMOVE_BG_API_KEY não configurada");
 

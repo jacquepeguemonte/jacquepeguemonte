@@ -1,5 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { useServerFn } from "@tanstack/react-start";
+import { adminLogin, adminLogout, adminStatus } from "@/lib/admin.functions";
 import {
   DEFAULT_ITEMS,
   getProductPhotos,
@@ -31,9 +33,6 @@ import {
   type Tema,
 } from "@/lib/firebase-catalog";
 
-const ADMIN_PASSWORD = "3282";
-const SESSION_KEY = "jpm_admin_session";
-
 export const Route = createFileRoute("/admin")({
   head: () => ({
     meta: [
@@ -53,6 +52,9 @@ export const Route = createFileRoute("/admin")({
 });
 
 function Admin() {
+  const login = useServerFn(adminLogin);
+  const checkSession = useServerFn(adminStatus);
+  const endSession = useServerFn(adminLogout);
   const [authed, setAuthed] = useState(false);
   const [pwd, setPwd] = useState("");
   const [error, setError] = useState("");
@@ -65,10 +67,10 @@ function Admin() {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    if (sessionStorage.getItem(SESSION_KEY) === "1") setAuthed(true);
+    void checkSession().then(({ ok }) => setAuthed(ok)).catch(() => setAuthed(false));
     setOverrides(loadOverrides());
     setCustom(loadCustom());
-  }, []);
+  }, [checkSession]);
 
   useEffect(() => {
     if (!authed) return;
@@ -80,19 +82,20 @@ function Admin() {
     };
   }, [authed]);
 
-  const tryLogin = (e: React.FormEvent) => {
+  const tryLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (pwd === ADMIN_PASSWORD) {
-      sessionStorage.setItem(SESSION_KEY, "1");
-      setAuthed(true);
-      setError("");
-    } else {
-      setError("Senha incorreta");
+    try {
+      const { ok } = await login({ data: { password: pwd } });
+      setPwd("");
+      setAuthed(ok);
+      setError(ok ? "" : "Senha incorreta");
+    } catch {
+      setError("Não foi possível entrar. Tente novamente.");
     }
   };
 
-  const logout = () => {
-    sessionStorage.removeItem(SESSION_KEY);
+  const logout = async () => {
+    await endSession();
     setAuthed(false);
     setPwd("");
   };

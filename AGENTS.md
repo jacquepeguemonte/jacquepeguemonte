@@ -13,3 +13,4 @@
 - Use the shared InfiniteCarousel with Embla Auto Scroll for kit and testimonial sliders, so swipe, navigation, pause, and reduced-motion behavior stay consistent.
 - Keep catalog cards and empty states in dedicated presentation components; preserve the catalog's existing filtering, selection, and availability logic.
 - Testimonials show only real Google reviews supplied by the owner; never invent reviews.
+- Admin access uses a server-verified password secret and an encrypted eight-hour HttpOnly session; check that session before image processing or privileged simulator operations so browser flags cannot authorize changes.

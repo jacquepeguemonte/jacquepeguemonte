@@ -2,15 +2,13 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { recortarPecaComIA } from "@/lib/removebg.functions";
+import { adminLogin, adminStatus } from "@/lib/admin.functions";
 import {
   CAMADA_LABELS,
   createPeca,
   uploadImage,
   type PecaCategoria,
 } from "@/lib/firebase-catalog";
-
-const ADMIN_PASSWORD = "3282";
-const SESSION_KEY = "jpm_admin_session";
 
 export const Route = createFileRoute("/admin_/recorte-ia")({
   head: () => ({
@@ -35,25 +33,31 @@ export const Route = createFileRoute("/admin_/recorte-ia")({
 });
 
 function RecorteIA() {
+  const login = useServerFn(adminLogin);
+  const checkSession = useServerFn(adminStatus);
   const [authed, setAuthed] = useState(false);
   const [pwd, setPwd] = useState("");
   const [loginError, setLoginError] = useState("");
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    if (sessionStorage.getItem(SESSION_KEY) === "1") setAuthed(true);
-  }, []);
+    void checkSession().then(({ ok }) => setAuthed(ok)).catch(() => setAuthed(false));
+  }, [checkSession]);
 
   if (!authed) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-background px-4">
         <form
-          onSubmit={(e) => {
+          onSubmit={async (e) => {
             e.preventDefault();
-            if (pwd === ADMIN_PASSWORD) {
-              sessionStorage.setItem(SESSION_KEY, "1");
-              setAuthed(true);
-            } else setLoginError("Senha incorreta");
+            try {
+              const { ok } = await login({ data: { password: pwd } });
+              setPwd("");
+              setAuthed(ok);
+              setLoginError(ok ? "" : "Senha incorreta");
+            } catch {
+              setLoginError("Não foi possível entrar. Tente novamente.");
+            }
           }}
           className="w-full max-w-sm rounded-2xl border border-border bg-card p-6 shadow"
         >
