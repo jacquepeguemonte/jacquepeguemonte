@@ -848,5 +848,47 @@
     "description": "Kit de festa Pegue e Monte tema Flashback. Inclui itens decorativos para sua festa em Goianésia - GO.",
     "image": "/__l5e/assets-v1/2e02695f-ba7c-4ef4-aae4-292559b1eb6a/tema-flashback.webp",
     "price": 170
+  },
+  {
+    "id": "JPM_76",
+    "title": "Homem Aranha HQ",
+    "description": "Kit de festa Pegue e Monte tema Homem Aranha HQ. Inclui itens decorativos para sua festa em Goianésia - GO.",
+    "image": "/__l5e/assets-v1/f6a1014c-4c14-4a35-a99d-204a8b13d686/tema-homem-aranha-hq.png",
+    "price": 170
+  },
+  {
+    "id": "JPM_77",
+    "title": "Ursinho Baby Azul",
+    "description": "Kit de festa Pegue e Monte tema Ursinho Baby Azul. Inclui itens decorativos para sua festa em Goianésia - GO.",
+    "image": "/__l5e/assets-v1/88f677e7-82b9-40e6-8e14-b63f244897da/tema-ursinho-baby-azul.png",
+    "price": 170
+  },
+  {
+    "id": "JPM_78",
+    "title": "Fundo do Mar",
+    "description": "Kit de festa Pegue e Monte tema Fundo do Mar. Inclui itens decorativos para sua festa em Goianésia - GO.",
+    "image": "/__l5e/assets-v1/04fc2e48-adec-4469-8048-3810aa8edea1/tema-fundo-do-mar.png",
+    "price": 170
+  },
+  {
+    "id": "JPM_79",
+    "title": "50 Anos Azul e Dourado",
+    "description": "Kit de festa Pegue e Monte tema 50 Anos Azul e Dourado. Inclui itens decorativos para sua festa em Goianésia - GO.",
+    "image": "/__l5e/assets-v1/de8d0126-36f8-46a3-9767-c14f0df3e89c/tema-50-anos-azul-dourado.png",
+    "price": 170
+  },
+  {
+    "id": "JPM_80",
+    "title": "Moranguinho Clássica",
+    "description": "Kit de festa Pegue e Monte tema Moranguinho Clássica. Inclui itens decorativos para sua festa em Goianésia - GO.",
+    "image": "/__l5e/assets-v1/ff49cec4-1245-4a3a-802b-51157a029228/tema-moranguinho-classica.webp",
+    "price": 170
+  },
+  {
+    "id": "JPM_81",
+    "title": "Confraternização Natalina",
+    "description": "Kit de festa Pegue e Monte tema Confraternização Natalina. Inclui itens decorativos para sua festa em Goianésia - GO.",
+    "image": "/__l5e/assets-v1/c565b1f0-9754-4523-85e5-5989f92b6686/tema-confraternizacao-natalina.webp",
+    "price": 170
   }
 ]

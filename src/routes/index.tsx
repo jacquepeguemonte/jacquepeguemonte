@@ -66,6 +66,7 @@ const NAV = [
   { label: "Catálogo", href: "#catalogo" },
   { label: "Como funciona", href: "#como-funciona" },
   { label: "Orçamento", href: "#simulador" },
+  { label: "Avaliações de Clientes", href: "#avaliacoes" },
   { label: "Contato", href: "#contato" },
 ];
 

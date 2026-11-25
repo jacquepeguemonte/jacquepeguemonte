@@ -24,7 +24,7 @@ const REVIEWS = [
 const GOOGLE_URL = "https://share.google/avc5Vr49EypK8L14i";
 
 export function CustomerTestimonials() {
-  return <section aria-labelledby="depoimentos-titulo" className="border-t border-border bg-muted/40 py-14">
+  return <section id="avaliacoes" aria-labelledby="depoimentos-titulo" className="scroll-mt-32 border-t border-border bg-muted/40 py-14">
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div className="mb-7 flex flex-wrap items-end justify-between gap-4">
         <div>
