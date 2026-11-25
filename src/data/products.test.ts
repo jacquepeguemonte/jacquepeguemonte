@@ -18,6 +18,10 @@ describe("temas novos de R$ 170,00", () => {
     ["JPM_79", "50 Anos Azul e Dourado"],
     ["JPM_80", "Moranguinho Clássica"],
     ["JPM_81", "Confraternização Natalina"],
+    ["JPM_82", "Adulto Rosa Choque e Dourado"],
+    ["JPM_83", "São Paulo FC"],
+    ["JPM_84", "Batizado Anjinho Verde e Dourado"],
+    ["JPM_85", "Cowboy Baby Nude"],
   ];
 
   for (const [id, title] of novos) {

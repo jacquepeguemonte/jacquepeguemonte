@@ -890,5 +890,33 @@
     "description": "Kit de festa Pegue e Monte tema Confraternização Natalina. Inclui itens decorativos para sua festa em Goianésia - GO.",
     "image": "/__l5e/assets-v1/c565b1f0-9754-4523-85e5-5989f92b6686/tema-confraternizacao-natalina.webp",
     "price": 170
+  },
+  {
+    "id": "JPM_82",
+    "title": "Adulto Rosa Choque e Dourado",
+    "description": "Kit de festa Pegue e Monte tema Adulto Rosa Choque e Dourado. Inclui itens decorativos para sua festa em Goianésia - GO.",
+    "image": "/__l5e/assets-v1/a59452b7-244c-49fd-95ae-044e5b162e80/tema-adulto-rosa-dourado.webp",
+    "price": 170
+  },
+  {
+    "id": "JPM_83",
+    "title": "São Paulo FC",
+    "description": "Kit de festa Pegue e Monte tema São Paulo FC. Inclui itens decorativos para sua festa em Goianésia - GO.",
+    "image": "/__l5e/assets-v1/676f25e7-879a-44b5-b208-c249a09ca485/tema-sao-paulo-fc.webp",
+    "price": 170
+  },
+  {
+    "id": "JPM_84",
+    "title": "Batizado Anjinho Verde e Dourado",
+    "description": "Kit de festa Pegue e Monte tema Batizado Anjinho Verde e Dourado. Inclui itens decorativos para sua festa em Goianésia - GO.",
+    "image": "/__l5e/assets-v1/d188967d-a7d2-4a1f-bd2b-2caf139b71eb/tema-batizado-anjinho.png",
+    "price": 170
+  },
+  {
+    "id": "JPM_85",
+    "title": "Cowboy Baby Nude",
+    "description": "Kit de festa Pegue e Monte tema Cowboy Baby Nude. Inclui itens decorativos para sua festa em Goianésia - GO.",
+    "image": "/__l5e/assets-v1/e30a96f5-6c23-42fe-9bf5-fba72cf90db0/tema-cowboy-baby.png",
+    "price": 170
   }
 ]
