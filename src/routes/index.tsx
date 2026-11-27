@@ -20,17 +20,22 @@ import { CATEGORIES, categorizeProduct, countByCategory } from "@/lib/categories
 const WHATSAPP = "5562981695886";
 const WHATSAPP_DISPLAY = "(62) 8169-5886";
 const CITY = "Goianésia - GO";
+const LOGO_URL = `https://jacquepeguemonte.lovable.app${logoAsset.url}`;
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Jacque Pegue & Monte | Catálogo de Decoração" },
-      { name: "description", content: "Catálogo virtual de kits de festa Pegue e Monte em Goianésia - GO." },
-      { property: "og:title", content: "Jacque Pegue & Monte | Catálogo" },
-      { property: "og:description", content: "Catálogo virtual de kits de festa Pegue e Monte em Goianésia - GO." },
+      { title: "Kits Pegue e Monte em Goianésia | Jacque Pegue & Monte" },
+      { name: "description", content: "Confira kits de decoração para festas infantis, adultas, chás e eventos em Goianésia - GO. Consulte disponibilidade e peça seu orçamento pelo WhatsApp." },
+      { property: "og:title", content: "Kits Pegue e Monte em Goianésia | Jacque Pegue & Monte" },
+      { property: "og:description", content: "Confira kits de decoração para festas infantis, adultas, chás e eventos em Goianésia - GO. Consulte disponibilidade e peça seu orçamento pelo WhatsApp." },
       { property: "og:url", content: "https://jacquepeguemonte.lovable.app/" },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:image", content: LOGO_URL },
+      { name: "twitter:image", content: LOGO_URL },
+      { name: "twitter:card", content: "summary" },
+      { name: "twitter:title", content: "Kits Pegue e Monte em Goianésia | Jacque Pegue & Monte" },
+      { name: "twitter:description", content: "Confira kits de decoração para festas infantis, adultas, chás e eventos em Goianésia - GO. Consulte disponibilidade e peça seu orçamento pelo WhatsApp." },
     ],
     links: [{ rel: "canonical", href: "https://jacquepeguemonte.lovable.app/" }],
     scripts: [
@@ -39,8 +44,10 @@ export const Route = createFileRoute("/")({
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "LocalBusiness",
+          "@id": "https://jacquepeguemonte.lovable.app/#business",
           name: "Jacque Pegue & Monte",
-          image: "https://jacquepeguemonte.lovable.app/",
+          image: LOGO_URL,
+          logo: LOGO_URL,
           url: "https://jacquepeguemonte.lovable.app/",
           telephone: "+55-62-98169-5886",
           address: {
@@ -51,8 +58,7 @@ export const Route = createFileRoute("/")({
             postalCode: "76380-000",
             addressCountry: "BR",
           },
-          availableService: "Retiradas agendadas",
-
+          sameAs: ["https://www.instagram.com/jacquepeguemonte", "https://br.pinterest.com/jacquepeguemonte"],
         }),
       },
     ],
@@ -286,9 +292,12 @@ function Index() {
                 Pegue e Monte · {CITY}
               </span>
               <h1 className="text-4xl font-extrabold leading-tight tracking-tight text-foreground sm:text-5xl">
-                Monte a festa dos seus sonhos de forma prática e econômica!
+                Aluguel de kits Pegue e Monte para festas em Goianésia - GO
               </h1>
-              <p className="mt-4 max-w-xl text-base text-muted-foreground">
+              <p className="mt-4 max-w-xl text-lg font-semibold text-foreground">
+                Monte a festa dos seus sonhos de forma prática e econômica!
+              </p>
+              <p className="mt-3 max-w-xl text-base text-muted-foreground">
                 Cenários infantis, adultos, chás e temáticos com cara de revista e
                 montagem simplificada. Busque no centro de Goianésia ou contrate
                 nossa entrega segura.
@@ -390,7 +399,7 @@ function Index() {
             <div className="mb-6 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
               <div>
                 <h2 className="text-3xl font-bold tracking-tight text-foreground">
-                  Itens mais recentes
+                  Kits disponíveis para sua festa
                 </h2>
                 <p className="mt-1 text-sm text-muted-foreground">
                   {filtered.length} {filtered.length === 1 ? "tema encontrado" : "temas encontrados"}
@@ -765,7 +774,7 @@ function Index() {
           </div>
 
           <div>
-            <h3 className="text-sm font-bold uppercase tracking-wide text-primary">Contato</h3>
+            <h2 className="text-sm font-bold uppercase tracking-wide text-primary">Contato e retirada</h2>
             <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
               <li>
                 <a href={`https://wa.me/${WHATSAPP}`} target="_blank" rel="noreferrer" className="hover:text-primary">
@@ -814,8 +823,7 @@ function Index() {
           </div>
         </div>
         <div className="border-t border-border py-6 text-center text-xs text-muted-foreground">
-          © {new Date().getFullYear()} Jacque Pegue &amp; Monte · {CITY} ·{" "}
-          <Link to="/admin" className="hover:text-primary">Admin</Link>
+          © {new Date().getFullYear()} Jacque Pegue &amp; Monte · {CITY}
         </div>
       </footer>
 

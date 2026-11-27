@@ -11,8 +11,10 @@ export const Route = createFileRoute("/recomendar")({
       { property: "og:title", content: "Recomendação de temas com IA | Jacque Pegue & Monte" },
       { property: "og:description", content: "Sugestões personalizadas de kits Pegue e Monte para sua festa." },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:url", content: "https://jacquepeguemonte.lovable.app/recomendar" },
+      { name: "twitter:card", content: "summary" },
     ],
+    links: [{ rel: "canonical", href: "https://jacquepeguemonte.lovable.app/recomendar" }],
   }),
   component: Recomendar,
 });

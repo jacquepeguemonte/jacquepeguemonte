@@ -87,6 +87,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:title", content: "Jacque Pegue & Monte | Decoração de Festa em Goianésia" },
       { property: "og:description", content: "Monte a festa dos seus sonhos de forma prática e econômica. Kits Pegue e Monte em Goianésia - GO." },
       { property: "og:type", content: "website" },
+      { property: "og:site_name", content: "Jacque Pegue & Monte" },
+      { property: "og:locale", content: "pt_BR" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:title", content: "Jacque Pegue & Monte | Decoração de Festa em Goianésia" },
       { name: "twitter:description", content: "Monte a festa dos seus sonhos de forma prática e econômica. Kits Pegue e Monte em Goianésia - GO." },
@@ -105,12 +107,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "@graph": [
             {
               "@type": "Organization",
+              "@id": "https://jacquepeguemonte.lovable.app/#organization",
               name: "Jacque Pegue & Monte",
               url: "https://jacquepeguemonte.lovable.app",
             },
             {
               "@type": "WebSite",
+              "@id": "https://jacquepeguemonte.lovable.app/#website",
               name: "Jacque Pegue & Monte",
+              inLanguage: "pt-BR",
+              publisher: { "@id": "https://jacquepeguemonte.lovable.app/#organization" },
               url: "https://jacquepeguemonte.lovable.app",
             },
           ],
@@ -126,7 +132,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="pt-BR">
       <head>
         <HeadContent />
       </head>
